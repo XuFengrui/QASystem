@@ -37,7 +37,6 @@ public class UserController {
             return new Result(300);
         }
 //        return userService.loginUserByPassword(user);
-//            return new Result(400);
     }
 
     /**
