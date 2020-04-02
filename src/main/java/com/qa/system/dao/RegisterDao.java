@@ -31,7 +31,7 @@ public class RegisterDao {
     public Register findRegisterByPhone(String phone){
 
         List<Register> registerList = jdbcTemplate.query("select * from register where phone = ?",new BeanPropertyRowMapper<>(Register.class),phone);
-        if(registerList != null && registerList.size()>0){
+        if(registerList.size()>0){
             return registerList.get(0);
         }else{
             return null;
@@ -59,11 +59,7 @@ public class RegisterDao {
     public List<Register> findAllRegister(){
 
         List<Register> registerList = jdbcTemplate.query("select * from register",new Object[]{},new BeanPropertyRowMapper<>(Register.class));
-        if(registerList != null && registerList.size()>0){
-            return registerList;
-        }else{
-            return null;
-        }
+        return registerList;
     }
 
     /**
@@ -88,7 +84,7 @@ public class RegisterDao {
     **/
     public int addRegister(Register register){
 
-        int count = jdbcTemplate.update("insert into register(phone,name,password,sex,age,shield) values(?,?,?,?,?,?)",register.getPhone(),register.getName(),register.getPassword(),register.getSex(),register.getAge());
+        int count = jdbcTemplate.update("insert into register(phone,name,password,sex,age) values(?,?,?,?,?)",register.getPhone(),register.getName(),register.getPassword(),register.getSex(),register.getAge());
         return count;
     }
 

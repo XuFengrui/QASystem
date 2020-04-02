@@ -18,6 +18,6 @@ public interface RegisterService {
     public int updateRegister(Register register);
     public int addRegister(Register register);
     public int deleteRegisterByPhone(String phone);
-    public int applyRegister(String phone,Register register);
+    public int applyRegister(Register register);
 
 }

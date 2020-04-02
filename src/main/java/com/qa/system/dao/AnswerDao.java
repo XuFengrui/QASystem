@@ -34,11 +34,7 @@ public class AnswerDao {
     **/
     public List<Answer> findAllAnswer() {
         List<Answer> answerList = jdbcTemplate.query("select * from answer",new Object[]{},new BeanPropertyRowMapper<>(Answer.class));
-        if(answerList != null && answerList.size()>0){
-            return answerList;
-        }else{
-            return null;
-        }
+        return answerList;
     }
 
     /**
@@ -50,7 +46,7 @@ public class AnswerDao {
     **/
     public Answer findAnswerById(int id) {
         List<Answer> answerList = jdbcTemplate.query("select * from answer where answerId = ?",new BeanPropertyRowMapper<>(Answer.class),id);
-        if(answerList != null && answerList.size()>0){
+        if(answerList.size()>0){
             return answerList.get(0);
         }else{
             return null;
@@ -134,18 +130,6 @@ public class AnswerDao {
 
     /**
     * @Author XuFengrui
-    * @Description 根据用户号码查询某指定用户的所有回答
-    * @Date 17:21 2020/3/29
-    * @Param [phone]
-    * @return java.util.List<com.qa.system.entity.Answer>
-    **/
-    public List<Answer> findAnswersByUserPhone(String phone) {
-        List<Answer> answerList = jdbcTemplate.query("select * from answer where answerer = ?",new BeanPropertyRowMapper<>(Answer.class),phone);
-        return answerList;
-    }
-
-    /**
-    * @Author XuFengrui
     * @Description 根据问题编号查找该问题所有的回答
     * @Date 13:28 2020/3/30
     * @Param [id]
@@ -158,7 +142,18 @@ public class AnswerDao {
 
     /**
     * @Author XuFengrui
-    * @Description 判断该回答是否是对问题问题的回答，false表示对问题的回答，true表示对回答的回答
+    * @Description 根据回答编号查询该回答下所有的评论
+    * @Date 18:09 2020/4/2
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    public List<Answer> findAnswersByAAnswerId(int id) {
+        List<Answer> answerList = jdbcTemplate.query("select * from answer where aAnswerId = ?",new BeanPropertyRowMapper<>(Answer.class),id);
+        return answerList;
+    }
+    /**
+    * @Author XuFengrui
+    * @Description 判断该回答是否是对问题的回答，false表示对问题的回答，true表示对回答的回答
     * @Date 15:17 2020/3/30
     * @Param [id]
     * @return boolean

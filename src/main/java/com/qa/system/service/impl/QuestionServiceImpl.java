@@ -6,7 +6,6 @@ import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
 import com.qa.system.service.QuestionService;
-import com.qa.system.service.UserService;
 import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,16 +57,23 @@ public class QuestionServiceImpl implements QuestionService {
             answerList.add(answers.get(0));
         }
         TimeSort.answerListSort(answerList);
-        List<Question> questionList = findAllQuestion();
+        List<Question> questionList = null;
         for (int j = 0; j < questions.size(); j++) {
             questionList.add(findQuestionById(answerList.get(j).getaQuestionId()));
         }
         return questionList;
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 根据关键词查询问题
+    * @Date 18:38 2020/4/2
+    * @Param [string]
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
     @Override
     public List<Question> findQuestionsByKeyword(String string) {
-        return findQuestionsByKeyword(string);
+        return questionDao.findQuestionsByKeyword(string);
     }
 
     /**
@@ -147,7 +153,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description 屏蔽问题
+    * @Description 屏蔽问题，0表示问题已被屏蔽，1表示成功屏蔽该问题
     * @Date 16:40 2020/3/29
     * @Param [question]
     * @return int
@@ -165,7 +171,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description 解除屏蔽问题
+    * @Description 解除屏蔽问题，0表示问题未被屏蔽，1表示成功取消屏蔽该问题
     * @Date 16:40 2020/3/29
     * @Param [question]
     * @return int
@@ -183,7 +189,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description
+    * @Description 屏蔽一串问题，返回值为成功屏蔽问题的数量
     * @Date 10:45 2020/3/30
     * @Param [questionList]
     * @return int
@@ -201,7 +207,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description
+    * @Description 取消屏蔽一串问题，返回值为成功取消屏蔽的问题数量
     * @Date 10:45 2020/3/30
     * @Param [questionList]
     * @return int
@@ -216,6 +222,5 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return questionList.size();
     }
-
 
 }

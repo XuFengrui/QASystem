@@ -94,7 +94,7 @@ public class AliyunSmsUtils {
     public static String verificationCode(String phone) throws ClientException {
         setNewCode();
         String code = Integer.toString(getNewCode());
-        System.out.println("发送的验证码为："+code);
+//        System.out.println("发送的验证码为："+code);
         //发短信
         SendSmsResponse response =sendSms(phone,code);
         if (response.getCode() != null && response.getCode().equals("OK")) {

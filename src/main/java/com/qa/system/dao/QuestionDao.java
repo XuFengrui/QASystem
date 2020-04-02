@@ -33,11 +33,7 @@ public class QuestionDao {
     **/
     public List<Question> findAllQuestion() {
         List<Question> questionList = jdbcTemplate.query("select * from question",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
-        if(questionList != null && questionList.size()>0){
-            return questionList;
-        }else{
-            return null;
-        }
+        return questionList;
     }
 
     /**
@@ -49,7 +45,7 @@ public class QuestionDao {
     **/
     public Question findQuestionById(int id) {
         List<Question> questionList = jdbcTemplate.query("select * from question where questionId = ?",new BeanPropertyRowMapper<>(Question.class),id);
-        if(questionList != null && questionList.size()>0){
+        if(questionList.size()>0){
             return questionList.get(0);
         }else{
             return null;
@@ -75,8 +71,8 @@ public class QuestionDao {
     * @return int
     **/
     public int maxQuestionId() {
-        List<Question> questionList = jdbcTemplate.query("select id from question",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
-        if(questionList != null && questionList.size()>0){
+        List<Question> questionList = jdbcTemplate.query("select * from question",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
+        if(questionList.size()>0){
             return questionList.get(questionList.size() - 1).getQuestionId();
         }else{
             return 0;

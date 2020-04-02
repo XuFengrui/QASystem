@@ -31,7 +31,7 @@ public class AdminDao {
     public Admin findAdminByName(String name){
 
         List<Admin> adminList = jdbcTemplate.query("select * from admin where name = ?",new BeanPropertyRowMapper<>(Admin.class),name);
-        if(adminList != null && adminList.size()>0){
+        if(adminList.size()>0){
             return adminList.get(0);
         }else{
             return null;
@@ -45,8 +45,7 @@ public class AdminDao {
     * @Param [user]
     * @return int
     **/
-    public int updateAdmin(Admin admin){
-
+    public int updateAdmin(Admin admin) {
         int count = jdbcTemplate.update("update admin set password = ?,status = ? where name = ?",admin.getPassword(),admin.getStatus(),admin.getName());
         return count;
     }
@@ -58,8 +57,7 @@ public class AdminDao {
     * @Param [admin]
     * @return int
     **/
-    public int addAdmin(Admin admin){
-
+    public int addAdmin(Admin admin) {
         int count = jdbcTemplate.update("insert into admin(name,password,status) values(?,?,?)", admin.getName(),admin.getPassword(),admin.getStatus());
         return count;
     }
@@ -71,8 +69,7 @@ public class AdminDao {
     * @Param [name]
     * @return int
     **/
-    public int deleteAdminByName(String name){
-
+    public int deleteAdminByName(String name) {
         int count = jdbcTemplate.update("delete from admin where name = ?",name);
         return count;
     }
@@ -84,7 +81,7 @@ public class AdminDao {
     * @Param [name]
     * @return boolean
     **/
-    public boolean isAdminExist(String name){
+    public boolean isAdminExist(String name) {
         return findAdminByName(name) != null;
     }
 

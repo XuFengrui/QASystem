@@ -4,7 +4,6 @@ import com.qa.system.dao.AnswerDao;
 import com.qa.system.dao.QuestionDao;
 import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Answer;
-import com.qa.system.entity.Question;
 import com.qa.system.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,20 +86,39 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 新增回答
+    * @Description 新增回答，-1表示该回答已存在,-2表示该回答回答的回答已被屏蔽，-3表示问题已被终结，-4表示该回答回答的问题已被屏蔽，返回1表示成功添加
     * @Date 16:39 2020/3/29
     * @Param [id, answer]
     * @return int
     **/
     @Override
     public int addAnswer(Answer answer) {
-        if(!answerDao.isAnswerExist(answer.getaAnswerId())){
-            if (userDao.findUserByName(answer.getAnswerer()).getShield() == 0) {
-                answer.setShield(0);
+        if(!answerDao.isAnswerExist(answer.getAnswerId())){
+            if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
+                if (questionDao.findQuestionById(answer.getaQuestionId()).getSignal() == 1) {
+                    if (answer.getaAnswerId() == 0) {
+                        if (userDao.findUserByName(answer.getAnswerer()).getShield() == 1) {
+                            answer.setShield(1);
+                        } else {
+                            answer.setShield(0);
+                        }
+                        return answerDao.addAnswer(answer);
+                    } else if (answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
+                        if (userDao.findUserByName(answer.getAnswerer()).getShield() == 1) {
+                            answer.setShield(1);
+                        } else {
+                            answer.setShield(0);
+                        }
+                        return answerDao.addAnswer(answer);
+                    } else {
+                        return -2;
+                    }
+                } else {
+                    return -3;
+                }
             } else {
-                answer.setShield(1);
+                return -4;
             }
-            return answerDao.addAnswer(answer);
         }else {
             return -1;
         }
@@ -108,15 +126,15 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 删除回答
+    * @Description 删除回答，若回答编号不存在则返回-1；若回答已被屏蔽返回0；若回答的问题已被屏蔽返回-2，若回答的问题已被终结返回-3，若回答的回答已被屏蔽返回-4，若更改成功则返回1
     * @Date 16:39 2020/3/29
     * @Param [id]
     * @return int
     **/
     @Override
     public int deleteAnswerById(int id) {
-        Answer answer = answerDao.findAnswerById(id);
-        if (answerDao.isAnswerExist(answer.getaAnswerId())) {
+        if (answerDao.isAnswerExist(id)) {
+            Answer answer = answerDao.findAnswerById(id);
             if (answer.getShield() == 1) {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answer.getaQuestionId()).getSignal() == 1) {
@@ -143,7 +161,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 屏蔽回答
+    * @Description 屏蔽回答,0表示该回答已被屏蔽，1表示成功屏蔽
     * @Date 16:39 2020/3/29
     * @Param [answer]
     * @return int
@@ -161,7 +179,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 解除屏蔽回答
+    * @Description 解除屏蔽回答，0表示该回答未被屏蔽，1表示成功解除屏蔽
     * @Date 16:40 2020/3/29
     * @Param [answer]
     * @return int
@@ -179,7 +197,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description
+    * @Description 返回值为成功屏蔽的回答数量
     * @Date 10:45 2020/3/30
     * @Param [answerList]
     * @return int
@@ -197,7 +215,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description
+    * @Description 返回值为成功解除屏蔽的回答数量
     * @Date 10:45 2020/3/30
     * @Param [answerList]
     * @return int

@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
     * @Author XuFengrui
-    * @Description 修改管理员信息
+    * @Description 修改管理员信息，-1表示管理员信息不存在
     * @Date 20:05 2020/3/31
     * @Param [admin]
     * @return int
@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
     * @Author XuFengrui
-    * @Description 新增管理员
+    * @Description 新增管理员，-1表示该管理员已存在
     * @Date 20:05 2020/3/31
     * @Param [admin]
     * @return int
@@ -66,7 +66,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
     * @Author XuFengrui
-    * @Description 删除管理员
+    * @Description 删除管理员，-1表示管理员信息不存在
     * @Date 20:05 2020/3/31
     * @Param [name]
     * @return int

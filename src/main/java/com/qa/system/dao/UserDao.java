@@ -31,7 +31,7 @@ public class UserDao {
     public User findUserByPhone(String phone){
 
         List<User> userList = jdbcTemplate.query("select * from user where phone = ?",new BeanPropertyRowMapper<>(User.class),phone);
-        if(userList != null && userList.size()>0){
+        if(userList.size()>0){
             return userList.get(0);
         }else{
             return null;
@@ -59,7 +59,7 @@ public class UserDao {
     public List<User> findAllUser(){
 
         List<User> userList = jdbcTemplate.query("select * from user",new Object[]{},new BeanPropertyRowMapper<>(User.class));
-        if(userList != null && userList.size()>0){
+        if(userList.size()>0){
             return userList;
         }else{
             return null;
@@ -125,7 +125,11 @@ public class UserDao {
     **/
     public User findUserByName(String name) {
         List<User> userList = jdbcTemplate.query("select * from user where name = ?",new BeanPropertyRowMapper<>(User.class),name);
-        return userList.get(0);
+        if(userList.size()>0){
+            return userList.get(0);
+        }else{
+            return null;
+        }
     }
 
     /**

@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     RegisterDao registerDao;
     QuestionDao questionDao;
     AnswerDao answerDao;
-    AdminDao adminDao;
     QuestionService questionService;
     AnswerService answerService;
 
@@ -42,7 +41,6 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public List<User> findAllUser() {
-
         return userDao.findAllUser();
     }
 
@@ -55,13 +53,12 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public User findUserByPhone(String phone) {
-
         return userDao.findUserByPhone(phone);
     }
 
     /**
     * @Author XuFengrui
-    * @Description 更改用户信息
+    * @Description 更改用户信息,-1表示该用户不存在
     * @Date 16:41 2020/3/29
     * @Param [phone, user]
     * @return int
@@ -77,7 +74,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 新增用户信息
+    * @Description 新增用户信息，-1表示用户已存在
     * @Date 16:41 2020/3/29
     * @Param [phone, user]
     * @return int
@@ -94,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 删除用户信息
+    * @Description 删除用户信息，-1表示用户不存在
     * @Date 16:41 2020/3/29
     * @Param [phone]
     * @return int
@@ -110,7 +107,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 用户根据用户名和密码登录
+    * @Description 用户根据用户名和密码登录，-1表示用户不存在，1表示登录成功，0表示用户名或密码错误
     * @Date 16:41 2020/3/29
     * @Param [user]
     * @return int
@@ -119,7 +116,7 @@ public class UserServiceImpl implements UserService {
     public int loginUserByPassword(User user) {
         if(!userDao.isUserExist(user.getPhone())){
             return -1;
-        }else if(userDao.findUserByPhone(user.getPhone()).getPassword().equals(user.getPassword())){
+        }else if(userDao.findUserByName(user.getName()).getPassword().equals(user.getPassword())){
             return 1;
         }else{
             return 0;
@@ -128,7 +125,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 用户根据手机号码和验证码登录
+    * @Description 用户根据手机号码和验证码登录，发送成功返回验证码
     * @Date 8:54 2020/4/2
     * @Param [phone]
     * @return int
@@ -140,7 +137,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 注册用户
+    * @Description 注册用户，-1表示注册表中没有该用户信息
     * @Date 16:41 2020/3/29
     * @Param [register]
     * @return int
@@ -162,7 +159,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 拉黑用户
+    * @Description 拉黑用户，0表示用户已被拉黑，1表示拉黑成功
     * @Date 16:41 2020/3/29
     * @Param [user]
     * @return int
@@ -172,7 +169,7 @@ public class UserServiceImpl implements UserService {
         if (user.getShield() == 1) {
             user.setShield(0);
             questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-            answerService.blacklistAnswers(answerDao.findAnswersByUserPhone(user.getPhone()));
+            answerService.blacklistAnswers(answerDao.findAnswersByUserName(user.getName()));
             return 1;
         }else {
             return 0;
@@ -181,7 +178,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 取消用户拉黑
+    * @Description 取消用户拉黑,0表示该用户未被拉黑，1表示取消拉黑成功
     * @Date 16:41 2020/3/29
     * @Param [user]
     * @return int
@@ -191,7 +188,7 @@ public class UserServiceImpl implements UserService {
         if (user.getShield() == 0) {
             user.setShield(1);
             questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-            answerService.whitelistAnswers(answerDao.findAnswersByUserPhone(user.getPhone()));
+            answerService.whitelistAnswers(answerDao.findAnswersByUserName(user.getName()));
             return 1;
         }else {
             return 0;

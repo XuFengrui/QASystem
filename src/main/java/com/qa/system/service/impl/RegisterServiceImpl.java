@@ -49,7 +49,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
     * @Author XuFengrui
-    * @Description 更改申请注册用户的信息
+    * @Description 更改申请注册用户的信息,-1表示注册表中无该用户信息
     * @Date 16:40 2020/3/29
     * @Param [phone, register]
     * @return int
@@ -65,7 +65,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
     * @Author XuFengrui
-    * @Description 新增申请注册用户的信息
+    * @Description 新增申请注册用户的信息，-1表示该用户已申请注册
     * @Date 16:40 2020/3/29
     * @Param [phone, register]
     * @return int
@@ -81,7 +81,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
     * @Author XuFengrui
-    * @Description 删除申请注册用户的信息
+    * @Description 删除申请注册用户的信息，-1表示注册表中无该用户信息
     * @Date 16:40 2020/3/29
     * @Param [phone]
     * @return int
@@ -103,11 +103,11 @@ public class RegisterServiceImpl implements RegisterService {
     * @return int
     **/
     @Override
-    public int applyRegister(String phone,Register register) {
-        if (!registerDao.isRegisterExist(phone)) {
-            return addRegister(register);
-        } else if (!userDao.isUserExist(phone)) {
-            return updateRegister(register);
+    public int applyRegister(Register register) {
+        if (!registerDao.isRegisterExist(register.getPhone())) {
+            return registerDao.addRegister(register);
+        } else if (!userDao.isUserExist(register.getPhone())) {
+            return registerDao.updateRegister(register);
         } else {
             return -1;
         }

@@ -62,10 +62,6 @@ public class LoginController {
         return userService.findAllUser();
     }
 
-
-    public void out() {
-        System.out.println("xxx");
-    }
 }
 
 
