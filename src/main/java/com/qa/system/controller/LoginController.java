@@ -20,22 +20,7 @@ public class LoginController {
     @Autowired
     AdminService adminService;
 
-    @CrossOrigin
-    @PostMapping(value = "/login")
-    @ResponseBody
-    public Result loginUser(@RequestBody User user) {
-        user.setPhone("888");
-        if (userService.loginUserByPassword(user) == 0) {
-            System.out.println("test");
-            return new Result(400);
-        } else if (userService.loginUserByPassword(user) == 1) {
-            System.out.println("1");
-            return new Result(200);
-        } else {
-            System.out.println("2");
-            return new Result(300);
-        }
-    }
+
 
     @CrossOrigin
     @PostMapping(value = "/add")
