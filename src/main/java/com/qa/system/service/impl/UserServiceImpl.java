@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int updateUser(User user) {
-        if(userDao.isUserExist(user.getPhone())){
+        if(userDao.isUserExistByPhone(user.getPhone())){
             return userDao.updateUser(user);
         }else {
             return -1;
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int addUser(User user) {
-        if(!userDao.isUserExist(user.getPhone())){
+        if(!userDao.isUserExistByPhone(user.getPhone())){
             user.setShield(1);
             return userDao.addUser(user);
         }else {
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int deleteUserByPhone(String phone) {
-        if(userDao.isUserExist(phone)){
+        if(userDao.isUserExistByPhone(phone)){
             return userDao.deleteUserByPhone(phone);
         }else {
             return -1;
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int loginUserByPassword(User user) {
-        if(!userDao.isUserExist(user.getPhone())){
+        if(!userDao.isUserExistByName(user.getName())){
             return -1;
         }else if(userDao.findUserByName(user.getName()).getPassword().equals(user.getPassword())){
             return 1;

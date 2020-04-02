@@ -40,13 +40,24 @@ public class UserDao {
 
     /**
     * @Author XuFengrui
-    * @Description 查找用户是否存在，false表示不存在，true表示存在
+    * @Description 根据号码查找用户是否存在，false表示不存在，true表示存在
     * @Date 16:25 2020/3/29
     * @Param [phone]
     * @return boolean
     **/
-    public boolean isUserExist(String phone){
+    public boolean isUserExistByPhone(String phone){
         return findUserByPhone(phone) != null;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据用户名查找用户是否存在，false表示不存在，true表示存在
+    * @Date 22:41 2020/4/2
+    * @Param [name]
+    * @return boolean
+    **/
+    public boolean isUserExistByName(String name){
+        return findUserByName(name) != null;
     }
 
     /**
@@ -155,4 +166,5 @@ public class UserDao {
         List<User> userList = jdbcTemplate.query("select * from user where shield = ?",new BeanPropertyRowMapper<>(User.class),0);
         return userList;
     }
+
 }

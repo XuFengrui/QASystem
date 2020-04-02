@@ -106,7 +106,7 @@ public class RegisterServiceImpl implements RegisterService {
     public int applyRegister(Register register) {
         if (!registerDao.isRegisterExist(register.getPhone())) {
             return registerDao.addRegister(register);
-        } else if (!userDao.isUserExist(register.getPhone())) {
+        } else if (!userDao.isUserExistByPhone(register.getPhone())) {
             return registerDao.updateRegister(register);
         } else {
             return -1;
