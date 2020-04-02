@@ -52,6 +52,34 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
+    * @Description 根据用户名查询该用户所发布的所有回答
+    * @Date 23:32 2020/4/2
+    * @Param [name]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @Override
+    public List<Answer> findAnswerByUserName(String name) {
+        return answerDao.findAnswersByUserName(name);
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据问题编号查询该问题下未被屏蔽的所有回答
+    * @Date 0:57 2020/4/3
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @Override
+    public List<Answer> findWhiteAnswerByQuestionId(int id) {
+        if (questionDao.isQuestionExist(id)) {
+            return answerDao.findWhiteAnswersByQuestionId(id);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 更改回答,若回答编号不存在则返回-1；若回答已被屏蔽返回0；若回答的问题已被屏蔽返回-2，若回答的问题已被终结返回-3，若回答的回答已被屏蔽返回-4，若更改成功则返回1
     * @Date 16:39 2020/3/29
     * @Param [id, answer]
@@ -161,38 +189,48 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 屏蔽回答,0表示该回答已被屏蔽，1表示成功屏蔽
+    * @Description 屏蔽回答,0表示该回答已被屏蔽，1表示成功屏蔽,-1表示该回答不存在
     * @Date 16:39 2020/3/29
     * @Param [answer]
     * @return int
     **/
     @Override
     public int blacklistAnswer(Answer answer) {
-        if (answer.getShield() == 1) {
-            answer.setShield(0);
-            answerDao.updateAnswer(answer);
-            return 1;
-        }else {
-            return 0;
+        if (answerDao.isAnswerExist(answer.getAnswerId())) {
+            if (answer.getShield() == 1) {
+                answer.setShield(0);
+                answerDao.answerShield(answer);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
+
     }
 
     /**
     * @Author XuFengrui
-    * @Description 解除屏蔽回答，0表示该回答未被屏蔽，1表示成功解除屏蔽
+    * @Description 解除屏蔽回答，0表示该回答未被屏蔽，1表示成功解除屏蔽,-1表示该回答不存在
     * @Date 16:40 2020/3/29
     * @Param [answer]
     * @return int
     **/
     @Override
     public int whitelistAnswer(Answer answer) {
-        if (answer.getShield() == 0) {
-            answer.setShield(1);
-            answerDao.updateAnswer(answer);
-            return 1;
-        }else {
-            return 0;
+        if (answerDao.isAnswerExist(answer.getAnswerId())) {
+            if (answer.getShield() == 0) {
+                answer.setShield(1);
+                answerDao.answerShield(answer);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
+
     }
 
     /**
@@ -207,7 +245,7 @@ public class AnswerServiceImpl implements AnswerService {
         for (int i = answerList.size(); i > 0; i--) {
             if (answerList.get(i - 1).getShield() == 1) {
                 answerList.get(i - 1).setShield(0);
-                answerDao.updateAnswer(answerList.get(i - 1));
+                answerDao.answerShield(answerList.get(i - 1));
             }
         }
         return answerList.size();
@@ -225,7 +263,7 @@ public class AnswerServiceImpl implements AnswerService {
         for (int i = answerList.size(); i > 0; i--) {
             if (answerList.get(i - 1).getShield() == 0) {
                 answerList.get(i - 1).setShield(1);
-                answerDao.updateAnswer(answerList.get(i - 1));
+                answerDao.answerShield(answerList.get(i - 1));
             }
         }
         return answerList.size();

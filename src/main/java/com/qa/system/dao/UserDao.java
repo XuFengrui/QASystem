@@ -167,4 +167,17 @@ public class UserDao {
         return userList;
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 改变用户的拉黑状态，失败返回0，成功返回1
+    * @Date 0:06 2020/4/3
+    * @Param [user]
+    * @return int
+    **/
+    public int userShield(User user) {
+        int count = jdbcTemplate.update("update user set shield = ? where phone = ?",user.getShield(),user.getPhone());
+        return count;
+    }
+
+
 }

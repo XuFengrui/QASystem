@@ -197,4 +197,16 @@ public class AnswerDao {
         List<Answer> answerList = jdbcTemplate.query("select * from answer where aQuestionId = ? and shield = ? ",new BeanPropertyRowMapper<>(Answer.class),id,1);
         return answerList;
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 改变回答的屏蔽状态，失败返回0，成功返回1
+    * @Date 0:10 2020/4/3
+    * @Param [answer]
+    * @return int
+    **/
+    public int answerShield(Answer answer) {
+        int count = jdbcTemplate.update("update answer set shield = ? where answerId = ?",answer.getShield(),answer.getAnswerId());
+        return count;
+    }
 }

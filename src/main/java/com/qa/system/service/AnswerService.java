@@ -16,6 +16,8 @@ public interface AnswerService {
     public List<Answer> findAllAnswer();
     public Answer findAnswerById(int id);
     public List<Answer> findAnswersByQuestionId(int id);
+    public List<Answer> findAnswerByUserName(String name);
+    public List<Answer> findWhiteAnswerByQuestionId(int id);
     public int updateAnswer(Answer answer);
     public int addAnswer(Answer answer);
     public int deleteAnswerById(int id);

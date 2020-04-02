@@ -125,14 +125,18 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 用户根据手机号码和验证码登录，发送成功返回验证码
+    * @Description 用户根据手机号码和验证码登录，发送成功返回验证码,失败返回空，非用户号码返回null
     * @Date 8:54 2020/4/2
     * @Param [phone]
     * @return int
     **/
     @Override
     public String loginUserByAuthCode(String phone) throws ClientException {
-        return AliyunSmsUtils.verificationCode(phone);
+        if (userDao.isUserExistByPhone(phone)) {
+            return AliyunSmsUtils.verificationCode(phone);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -159,40 +163,52 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 拉黑用户，0表示用户已被拉黑，1表示拉黑成功
+    * @Description 拉黑用户，0表示用户已被拉黑，1表示拉黑成功,-1表示用户不存在
     * @Date 16:41 2020/3/29
     * @Param [user]
     * @return int
     **/
     @Override
     public int blacklistUser(User user) {
-        if (user.getShield() == 1) {
-            user.setShield(0);
-            questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-            answerService.blacklistAnswers(answerDao.findAnswersByUserName(user.getName()));
-            return 1;
-        }else {
-            return 0;
+        if (userDao.isUserExistByPhone(user.getPhone())) {
+            if (user.getShield() == 1) {
+                user.setShield(0);
+                userDao.userShield(user);
+                questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
+                answerService.blacklistAnswers(answerDao.findAnswersByUserName(user.getName()));
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
+
     }
 
     /**
     * @Author XuFengrui
-    * @Description 取消用户拉黑,0表示该用户未被拉黑，1表示取消拉黑成功
+    * @Description 取消用户拉黑,0表示该用户未被拉黑，1表示取消拉黑成功，-1表示用户不存在
     * @Date 16:41 2020/3/29
     * @Param [user]
     * @return int
     **/
     @Override
     public int whitelistUser(User user) {
-        if (user.getShield() == 0) {
-            user.setShield(1);
-            questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-            answerService.whitelistAnswers(answerDao.findAnswersByUserName(user.getName()));
-            return 1;
-        }else {
-            return 0;
+        if (userDao.isUserExistByPhone(user.getPhone())) {
+            if (user.getShield() == 0) {
+                user.setShield(1);
+                userDao.userShield(user);
+                questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));
+                answerService.whitelistAnswers(answerDao.findAnswersByUserName(user.getName()));
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
+
     }
 
 }

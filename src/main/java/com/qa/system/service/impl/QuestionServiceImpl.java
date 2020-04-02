@@ -78,6 +78,18 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
+    * @Description 根据用户名查找该用户发布的所有问题
+    * @Date 23:26 2020/4/2
+    * @Param [name]
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    @Override
+    public List<Question> findQuestionByUserName(String name) {
+        return questionDao.findQuestionsByUserName(name);
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 根据问题编号查询问题
     * @Date 16:40 2020/3/29
     * @Param [id]
@@ -153,37 +165,45 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description 屏蔽问题，0表示问题已被屏蔽，1表示成功屏蔽该问题
+    * @Description 屏蔽问题，0表示问题已被屏蔽，1表示成功屏蔽该问题,-1表示该问题不存在
     * @Date 16:40 2020/3/29
     * @Param [question]
     * @return int
     **/
     @Override
     public int blacklistQuestion(Question question) {
-        if (question.getShield() == 1) {
-            question.setShield(0);
-            questionDao.updateQuestion(question);
-            return 1;
-        }else {
-            return 0;
+        if (questionDao.isQuestionExist(question.getQuestionId())) {
+            if (question.getShield() == 1) {
+                question.setShield(0);
+                questionDao.questionShield(question);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
     }
 
     /**
     * @Author XuFengrui
-    * @Description 解除屏蔽问题，0表示问题未被屏蔽，1表示成功取消屏蔽该问题
+    * @Description 解除屏蔽问题，0表示问题未被屏蔽，1表示成功取消屏蔽该问题,-1表示该问题不存在
     * @Date 16:40 2020/3/29
     * @Param [question]
     * @return int
     **/
     @Override
     public int whitelistQuestion(Question question) {
-        if (question.getShield() == 0) {
-            question.setShield(1);
-            questionDao.updateQuestion(question);
-            return 1;
-        }else {
-            return 0;
+        if (questionDao.isQuestionExist(question.getQuestionId())) {
+            if (question.getShield() == 0) {
+                question.setShield(1);
+                questionDao.questionShield(question);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
         }
     }
 
@@ -199,7 +219,7 @@ public class QuestionServiceImpl implements QuestionService {
         for (int i = questionList.size(); i > 0; i--) {
             if (questionList.get(i - 1).getShield() == 1) {
                 questionList.get(i - 1).setShield(0);
-                questionDao.updateQuestion(questionList.get(i - 1));
+                questionDao.questionShield(questionList.get(i - 1));
             }
         }
         return questionList.size();
@@ -217,10 +237,30 @@ public class QuestionServiceImpl implements QuestionService {
         for (int i = questionList.size(); i > 0; i--) {
             if (questionList.get(i - 1).getShield() == 0) {
                 questionList.get(i - 1).setShield(1);
-                questionDao.updateQuestion(questionList.get(i - 1));
+                questionDao.questionShield(questionList.get(i - 1));
             }
         }
         return questionList.size();
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 终结问题，问题不存在返回-1，问题已被终结返回0，成功终结问题返回1
+    * @Date 0:16 2020/4/3
+    * @Param [question]
+    * @return int
+    **/
+    @Override
+    public int endQuestion(Question question) {
+        if (questionDao.isQuestionExist(question.getQuestionId())) {
+            if (question.getSignal() == 1) {
+                question.setSignal(0);
+                return questionDao.questionSignal(question);
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
 }

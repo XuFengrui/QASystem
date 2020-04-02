@@ -1,6 +1,7 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Question;
+import com.qa.system.entity.User;
 import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -172,5 +173,29 @@ public class QuestionDao {
     public List<Question> findQuestionsByKeyword(String string) {
         List<Question> questionList = jdbcTemplate.query("select * from question where (details like ? or label like ? or questioner like ?) and shield = ?",new Object[]{"%"+string+"%","%"+string+"%","%"+string+"%",1},new BeanPropertyRowMapper<>(Question.class));
         return questionList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 改变问题的屏蔽状态，失败返回0，成功返回1
+    * @Date 0:08 2020/4/3
+    * @Param [question]
+    * @return int
+    **/
+    public int questionShield(Question question) {
+        int count = jdbcTemplate.update("update question set shield = ? where questionId = ?",question.getShield(),question.getQuestionId());
+        return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 改变问题的终结状态，失败返回0，成功返回1
+    * @Date 0:11 2020/4/3
+    * @Param [question]
+    * @return int
+    **/
+    public int questionSignal(Question question) {
+        int count = jdbcTemplate.update("update question set signal = ? where questionId = ?",question.getSignal(),question.getQuestionId());
+        return count;
     }
 }
