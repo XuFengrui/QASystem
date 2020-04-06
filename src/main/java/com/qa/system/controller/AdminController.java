@@ -60,7 +60,7 @@ public class AdminController {
     @PostMapping(value = "/admin/register")
     @ResponseBody
     public List<Register> adminAllRegister() {
-        return registerService.findAllRegister();
+        return registerService.findNotPassedRegister();
     }
 
     /**

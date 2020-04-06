@@ -112,4 +112,16 @@ public class RegisterServiceImpl implements RegisterService {
             return -1;
         }
     }
+
+    @Override
+    public List<Register> findNotPassedRegister() {
+        List<Register> registerList = null;
+        List<Register> registers = registerDao.findAllRegister();
+        for (int i = registers.size(); i > 0; i--) {
+            if (!userDao.isUserExistByPhone(registers.get(i - 1).getPhone())) {
+                registerList.add(registers.get(i - 1));
+            }
+        }
+        return registerList;
+    }
 }

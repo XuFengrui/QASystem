@@ -14,6 +14,7 @@ import java.util.List;
 public interface RegisterService {
 
     public List<Register> findAllRegister();
+    public List<Register> findNotPassedRegister();
     public Register findRegisterByPhone(String phone);
     public int updateRegister(Register register);
     public int addRegister(Register register);
