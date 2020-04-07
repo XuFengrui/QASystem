@@ -53,4 +53,18 @@ public class QuestionController {
     public List<Answer> questionToAnswer(@RequestBody Question question) {
         return answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 新增问题
+    * @Date 22:17 2020/4/7
+    * @Param [question] question类
+    * @return int -1表示问题已存在创建失败，0表示创建成功但是该提问人已被拉黑；成功新增返回1（提问人未被拉黑的情况）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/question/add")
+    @ResponseBody
+    public int questionAdd(@RequestBody Question question) {
+        return questionService.addQuestion(question);
+    }
 }
