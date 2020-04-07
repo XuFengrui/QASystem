@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
     * @return int
     **/
     @Override
-    public int registerUser(Register register) {
+    public int registerUser(Register register) throws ClientException {
         if (registerDao.isRegisterExist(register.getPhone())) {
             User user = new User();
             user.setPhone(register.getPhone());
@@ -155,6 +155,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(register.getPassword());
             user.setSex(register.getSex());
             user.setAge(register.getAge());
+            AliyunSmsUtils.sendSuccess(register.getPhone(),register.getName());
             return addUser(user);
         }else {
             return -1;

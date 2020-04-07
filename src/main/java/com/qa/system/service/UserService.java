@@ -23,7 +23,7 @@ public interface UserService {
     public int deleteUserByPhone(String phone);
     public int loginUserByPassword(User user);
     public String loginUserByAuthCode(String phone) throws ClientException;
-    public int registerUser(Register register);
+    public int registerUser(Register register) throws ClientException;
     public int blacklistUser(User user);
     public int whitelistUser(User user);
 
