@@ -1,5 +1,6 @@
 package com.qa.system.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
 import com.qa.system.entity.Register;
@@ -185,7 +186,7 @@ public class AdminController {
     @CrossOrigin
     @PostMapping(value = "/admin/userRegister")
     @ResponseBody
-    public int adminUserRegister(@RequestBody Register register) {
+    public int adminUserRegister(@RequestBody Register register) throws ClientException {
         return userService.registerUser(register);
     }
 
