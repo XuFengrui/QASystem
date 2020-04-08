@@ -24,7 +24,11 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     QuestionDao questionDao;
+
+    @Autowired
     UserDao userDao;
+
+    @Autowired
     AnswerDao answerDao;
 
     /**

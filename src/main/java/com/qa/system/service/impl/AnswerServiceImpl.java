@@ -22,7 +22,11 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     AnswerDao answerDao;
+
+    @Autowired
     QuestionDao questionDao;
+
+    @Autowired
     UserDao userDao;
 
 

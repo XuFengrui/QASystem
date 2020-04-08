@@ -21,6 +21,8 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Autowired
     RegisterDao registerDao;
+
+    @Autowired
     UserDao userDao;
 
     /**

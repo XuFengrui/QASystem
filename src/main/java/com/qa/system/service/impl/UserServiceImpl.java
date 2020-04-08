@@ -26,10 +26,20 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
     RegisterDao registerDao;
+
+    @Autowired
     QuestionDao questionDao;
+
+    @Autowired
     AnswerDao answerDao;
+
+    @Autowired
     QuestionService questionService;
+
+    @Autowired
     AnswerService answerService;
 
     /**
