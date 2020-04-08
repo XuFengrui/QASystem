@@ -88,7 +88,7 @@ public class QuestionDao {
     * @return int
     **/
     public int updateQuestion(Question question) {
-        int count = jdbcTemplate.update("update question set details = ?,questioner = ?,shield = ?,time = ?,heat = ?,label = ?,signal = ? where questionId = ?",question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getSignal(),question.getQuestionId());
+        int count = jdbcTemplate.update("update question set details = ?,questioner = ?,shield = ?,time = ?,heat = ?,label = ?,end = ? where questionId = ?",question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getEnd(),question.getQuestionId());
         return count;
     }
 
@@ -100,7 +100,7 @@ public class QuestionDao {
     * @return int
     **/
     public int addQuestion(Question question) {
-        int count = jdbcTemplate.update("insert into question(questionId,details,questioner,shield,time,heat,label,signal) values(?,?,?,?,?,?,?,?)",maxQuestionId()+1,question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getSignal());
+        int count = jdbcTemplate.update("insert into question(questionId,details,questioner,shield,time,heat,label,end) values(?,?,?,?,?,?,?,?)",maxQuestionId()+1,question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getEnd());
         return count;
     }
 
@@ -195,7 +195,7 @@ public class QuestionDao {
     * @return int
     **/
     public int questionSignal(Question question) {
-        int count = jdbcTemplate.update("update question set signal = ? where questionId = ?",question.getSignal(),question.getQuestionId());
+        int count = jdbcTemplate.update("update question set end = ? where questionId = ?",question.getEnd(),question.getQuestionId());
         return count;
     }
 }

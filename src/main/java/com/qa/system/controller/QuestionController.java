@@ -48,10 +48,10 @@ public class QuestionController {
     * @return java.util.List<com.qa.system.entity.Answer> 回答类数组
     **/
     @CrossOrigin
-    @PostMapping(value = "/question/answer")
+    @RequestMapping(value = "/question/answer")
     @ResponseBody
-    public List<Answer> questionToAnswer(@RequestBody Question question) {
-        return answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
+    public List<Answer> questionToAnswer() {
+        return answerService.findWhiteAnswerByQuestionId(1);
     }
 
     /**

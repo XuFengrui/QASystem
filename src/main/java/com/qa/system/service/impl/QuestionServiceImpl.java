@@ -140,7 +140,7 @@ public class QuestionServiceImpl implements QuestionService {
                 question.setShield(1);
             }
             question.setHeat(0);
-            question.setSignal(1);
+            question.setEnd(1);
             return questionDao.addQuestion(question);
         }else {
             return -1;
@@ -257,8 +257,8 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int endQuestion(Question question) {
         if (questionDao.isQuestionExist(question.getQuestionId())) {
-            if (question.getSignal() == 1) {
-                question.setSignal(0);
+            if (question.getEnd() == 1) {
+                question.setEnd(0);
                 return questionDao.questionSignal(question);
             } else {
                 return 0;

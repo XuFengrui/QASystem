@@ -94,7 +94,7 @@ public class AnswerServiceImpl implements AnswerService {
         if (answerDao.isAnswerExist(answer.getaAnswerId())) {
             if (answer.getShield() == 1) {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
-                    if (questionDao.findQuestionById(answer.getaQuestionId()).getSignal() == 1) {
+                    if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
                             return answerDao.updateAnswer(answer);
                         } else if (findAnswerById(answer.getaAnswerId()).getShield() == 1) {
@@ -127,7 +127,7 @@ public class AnswerServiceImpl implements AnswerService {
     public int addAnswer(Answer answer) {
         if(!answerDao.isAnswerExist(answer.getAnswerId())){
             if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
-                if (questionDao.findQuestionById(answer.getaQuestionId()).getSignal() == 1) {
+                if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
                     if (answer.getaAnswerId() == 0) {
                         if (userDao.findUserByName(answer.getAnswerer()).getShield() == 1) {
                             answer.setShield(1);
@@ -169,7 +169,7 @@ public class AnswerServiceImpl implements AnswerService {
             Answer answer = answerDao.findAnswerById(id);
             if (answer.getShield() == 1) {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
-                    if (questionDao.findQuestionById(answer.getaQuestionId()).getSignal() == 1) {
+                    if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
                             return answerDao.deleteAnswerById(id);
                         } else if (findAnswerById(answer.getaAnswerId()).getShield() == 1) {

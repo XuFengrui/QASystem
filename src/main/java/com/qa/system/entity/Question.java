@@ -16,7 +16,7 @@ public class Question {
     private String time;
     private int heat;
     private String label;
-    private int signal;
+    private int end;
 
     public int getQuestionId() {
         return questionId;
@@ -74,11 +74,11 @@ public class Question {
         this.label = label;
     }
 
-    public int getSignal() {
-        return signal;
+    public int getEnd() {
+        return end;
     }
 
-    public void setSignal(int signal) {
-        this.signal = signal;
+    public void setEnd(int end) {
+        this.end = end;
     }
 }
