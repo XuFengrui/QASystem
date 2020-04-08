@@ -67,4 +67,18 @@ public class QuestionController {
     public int questionAdd(@RequestBody Question question) {
         return questionService.addQuestion(question);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据问题Id查询问题
+    * @Date 11:18 2020/4/8
+    * @Param [question] 问题编号
+    * @return com.qa.system.entity.Question 问题类
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/question/query")
+    @ResponseBody
+    public Question questionFindById(@RequestBody Question question) {
+        return questionService.findQuestionById(question.getQuestionId());
+    }
 }
