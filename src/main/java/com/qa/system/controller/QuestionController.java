@@ -65,7 +65,6 @@ public class QuestionController {
     @PostMapping(value = "/question/add")
     @ResponseBody
     public int questionAdd(@RequestBody Question question) {
-        System.out.println(question.getLabel());
         return questionService.addQuestion(question);
     }
 
