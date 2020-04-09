@@ -50,8 +50,8 @@ public class QuestionController {
     @CrossOrigin
     @RequestMapping(value = "/question/answer")
     @ResponseBody
-    public List<Answer> questionToAnswer() {
-        return answerService.findWhiteAnswerByQuestionId(1);
+    public List<Answer> questionToAnswer(@RequestBody Question question) {
+        return answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
     }
 
     /**
