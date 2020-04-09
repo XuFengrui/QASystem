@@ -140,4 +140,9 @@ public class UserController {
     public int userRegister(@RequestBody Register register) {
         return registerService.applyRegister(register);
     }
+
+//    @RequestMapping(value = "/user/hello")
+//    public String  userRegister() {
+//        return "hello!";
+//    }
 }

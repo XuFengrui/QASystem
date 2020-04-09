@@ -74,7 +74,7 @@ public class AnswerDao {
     public int maxAnswerId() {
         List<Answer> answerList = jdbcTemplate.query("select * from answer",new Object[]{},new BeanPropertyRowMapper<>(Answer.class));
         if(answerList.size()>0){
-            return answerList.get(answerList.size() - 1).getaAnswerId();
+            return answerList.get(answerList.size() - 1).getAnswerId();
         }else{
             return 0;
         }
