@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://localhost:3306/question_answer?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/question_answer?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
