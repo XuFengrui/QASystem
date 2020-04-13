@@ -88,7 +88,7 @@ public class QuestionDao {
     * @return int
     **/
     public int updateQuestion(Question question) {
-        int count = jdbcTemplate.update("update question set details = ?,questioner = ?,shield = ?,time = ?,heat = ?,label = ?,end = ? where questionId = ?",question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getEnd(),question.getQuestionId());
+        int count = jdbcTemplate.update("update question set details = ?,questioner = ?,shield = ?,heat = ?,label = ?,end = ?,lastTime = ? where questionId = ?",question.getDetails(),question.getQuestioner(),question.getShield(),question.getHeat(),question.getLabel(),question.getEnd(),FormatChange.dateTimeChange(new Date()),question.getQuestionId());
         return count;
     }
 
@@ -100,7 +100,7 @@ public class QuestionDao {
     * @return int
     **/
     public int addQuestion(Question question) {
-        int count = jdbcTemplate.update("insert into question(questionId,details,questioner,shield,time,heat,label,end) values(?,?,?,?,?,?,?,?)",maxQuestionId()+1,question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getEnd());
+        int count = jdbcTemplate.update("insert into question(questionId,details,questioner,shield,time,heat,label,end,lastTime) values(?,?,?,?,?,?,?,?,?)",maxQuestionId()+1,question.getDetails(),question.getQuestioner(),question.getShield(),FormatChange.dateTimeChange(new Date()),question.getHeat(),question.getLabel(),question.getEnd(),FormatChange.dateTimeChange(new Date()));
         return count;
     }
 

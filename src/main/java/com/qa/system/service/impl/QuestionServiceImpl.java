@@ -52,19 +52,8 @@ public class QuestionServiceImpl implements QuestionService {
     **/
     @Override
     public List<Question> findWhiteQuestionByTimeOrder() {
-        List<Answer> answerList = null;
-        List<Answer> answers = null;
-        List<Question> questions = questionDao.findAllWhiteQuestions();
-        for (int i = 0; i < questions.size(); i++) {
-            answers = answerDao.findWhiteAnswersByQuestionId(questions.get(i).getQuestionId());
-            TimeSort.answerListSort(answers);
-            answerList.add(answers.get(0));
-        }
-        TimeSort.answerListSort(answerList);
-        List<Question> questionList = null;
-        for (int j = 0; j < questions.size(); j++) {
-            questionList.add(findQuestionById(answerList.get(j).getaQuestionId()));
-        }
+        List<Question> questionList = questionDao.findAllWhiteQuestions();
+        TimeSort.questionListSort(questionList);
         return questionList;
     }
 

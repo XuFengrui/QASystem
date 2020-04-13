@@ -96,8 +96,10 @@ public class AnswerServiceImpl implements AnswerService {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
+                            questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
                             return answerDao.updateAnswer(answer);
                         } else if (findAnswerById(answer.getaAnswerId()).getShield() == 1) {
+                            questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
                             return answerDao.updateAnswer(answer);
                         } else {
                             return -4;
@@ -131,10 +133,12 @@ public class AnswerServiceImpl implements AnswerService {
                     if (answer.getaAnswerId() == 0) {
                         if (userDao.findUserByName(answer.getAnswerer()).getShield() == 1) {
                             answer.setShield(1);
+                            questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
                         } else {
                             answer.setShield(0);
                         }
                         return answerDao.addAnswer(answer);
+
                     } else if (answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
                         if (userDao.findUserByName(answer.getAnswerer()).getShield() == 1) {
                             answer.setShield(1);

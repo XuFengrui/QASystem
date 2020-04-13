@@ -63,8 +63,8 @@ public class TimeSort {
             public int compare(Question o1, Question o2) {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    Date d1 = format.parse(o1.getTime());
-                    Date d2 = format.parse(o2.getTime());
+                    Date d1 = format.parse(o1.getLastTime());
+                    Date d2 = format.parse(o2.getLastTime());
                     if (d1.getTime() > d2.getTime()) {
                         return -1;
                     } else if (d1.getTime() < d2.getTime()) {

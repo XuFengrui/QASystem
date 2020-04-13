@@ -33,7 +33,7 @@ public class QuestionController {
     * @return java.util.List<com.qa.system.entity.Question> 问题类数组
     **/
     @CrossOrigin
-    @PostMapping(value = "/question/all")
+    @RequestMapping(value = "/question/all")
     @ResponseBody
     public List<Question> questionAll() {
         return questionService.findWhiteQuestionByTimeOrder();

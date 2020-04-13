@@ -17,6 +17,7 @@ public class Question {
     private int heat;
     private String label;
     private int end;
+    private String lastTime;
 
     public int getQuestionId() {
         return questionId;
@@ -80,5 +81,13 @@ public class Question {
 
     public void setEnd(int end) {
         this.end = end;
+    }
+
+    public String getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(String lastTime) {
+        this.lastTime = lastTime;
     }
 }
