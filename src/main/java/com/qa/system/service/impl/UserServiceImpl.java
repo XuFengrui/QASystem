@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 根据号码查询用户
+    * @Description 根据号码查询用户，存在则返回该用户类，不存在返回null
     * @Date 16:41 2020/3/29
     * @Param [phone]
     * @return com.qa.system.entity.User

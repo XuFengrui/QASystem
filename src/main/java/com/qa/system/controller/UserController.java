@@ -146,7 +146,7 @@ public class UserController {
     * @Description 根据号码查询用户
     * @Date 21:03 2020/4/13
     * @Param [user] 电话号码
-    * @return com.qa.system.entity.User 用户类
+    * @return com.qa.system.entity.User 存在则返回该用户类，不存在则返回null
     **/
     @CrossOrigin
     @PostMapping(value = "/user/query")

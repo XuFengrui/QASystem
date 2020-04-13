@@ -23,7 +23,7 @@ public class UserDao {
 
     /**
     * @Author XuFengrui
-    * @Description 根据号码查找用户
+    * @Description 根据号码查找用户，存在则返回该用户类，不存在返回null
     * @Date 16:25 2020/3/29
     * @Param [phone]
     * @return com.qa.system.entity.User
