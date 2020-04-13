@@ -141,6 +141,19 @@ public class UserController {
         return registerService.applyRegister(register);
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 根据号码查询用户
+    * @Date 21:03 2020/4/13
+    * @Param [user] 电话号码
+    * @return com.qa.system.entity.User 用户类
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/query")
+    @ResponseBody
+    public User userFindByPhone(@RequestBody User user) {
+        return userService.findUserByPhone(user.getPhone());
+    }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

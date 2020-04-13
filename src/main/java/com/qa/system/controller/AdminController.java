@@ -1,14 +1,8 @@
 package com.qa.system.controller;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.qa.system.entity.Answer;
-import com.qa.system.entity.Question;
-import com.qa.system.entity.Register;
-import com.qa.system.entity.User;
-import com.qa.system.service.AnswerService;
-import com.qa.system.service.QuestionService;
-import com.qa.system.service.RegisterService;
-import com.qa.system.service.UserService;
+import com.qa.system.entity.*;
+import com.qa.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +29,9 @@ public class AdminController {
 
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    AdminService adminService;
 
     /**
     * @Author XuFengrui
@@ -190,5 +187,18 @@ public class AdminController {
         return userService.registerUser(register);
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 管理员登录
+    * @Date 20:59 2020/4/13
+    * @Param [admin] 管理员的账号和密码
+    * @return int -1表示该账号不存在，0表示账号或密码错误，-2表示该账号已被登录，1表示登录成功
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/login")
+    @ResponseBody
+    public int adminLogin(@RequestBody Admin admin) {
+        return adminService.loginAdmin(admin);
+    }
 
 }
