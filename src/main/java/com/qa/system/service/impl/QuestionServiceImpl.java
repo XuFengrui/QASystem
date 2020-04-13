@@ -246,7 +246,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int endQuestion(Question question) {
         if (questionDao.isQuestionExist(question.getQuestionId())) {
-            if (question.getEnd() == 1) {
+            if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 1) {
                 question.setEnd(0);
                 return questionDao.questionSignal(question);
             } else {
