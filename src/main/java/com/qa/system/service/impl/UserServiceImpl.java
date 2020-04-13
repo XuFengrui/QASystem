@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int blacklistUser(User user) {
         if (userDao.isUserExistByPhone(user.getPhone())) {
-            if (user.getShield() == 1) {
+            if (userDao.findUserByPhone(user.getPhone()).getShield() == 1) {
                 user.setShield(0);
                 userDao.userShield(user);
                 questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int whitelistUser(User user) {
         if (userDao.isUserExistByPhone(user.getPhone())) {
-            if (user.getShield() == 0) {
+            if (userDao.findUserByPhone(user.getPhone()).getShield() == 0) {
                 user.setShield(1);
                 userDao.userShield(user);
                 questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));

@@ -205,7 +205,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int blacklistAnswer(Answer answer) {
         if (answerDao.isAnswerExist(answer.getAnswerId())) {
-            if (answer.getShield() == 1) {
+            if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
                 answer.setShield(0);
                 answerDao.answerShield(answer);
                 return 1;
@@ -228,7 +228,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int whitelistAnswer(Answer answer) {
         if (answerDao.isAnswerExist(answer.getAnswerId())) {
-            if (answer.getShield() == 0) {
+            if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 0) {
                 answer.setShield(1);
                 answerDao.answerShield(answer);
                 return 1;
@@ -251,7 +251,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int blacklistAnswers(List<Answer> answerList) {
         for (int i = answerList.size(); i > 0; i--) {
-            if (answerList.get(i - 1).getShield() == 1) {
+            if (answerDao.findAnswerById(answerList.get(i - 1).getAnswerId()).getShield() == 1) {
                 answerList.get(i - 1).setShield(0);
                 answerDao.answerShield(answerList.get(i - 1));
             }
@@ -269,7 +269,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int whitelistAnswers(List<Answer> answerList) {
         for (int i = answerList.size(); i > 0; i--) {
-            if (answerList.get(i - 1).getShield() == 0) {
+            if (answerDao.findAnswerById(answerList.get(i - 1).getAnswerId()).getShield() == 0) {
                 answerList.get(i - 1).setShield(1);
                 answerDao.answerShield(answerList.get(i - 1));
             }

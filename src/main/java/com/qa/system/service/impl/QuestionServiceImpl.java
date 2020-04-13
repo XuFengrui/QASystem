@@ -166,7 +166,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int blacklistQuestion(Question question) {
         if (questionDao.isQuestionExist(question.getQuestionId())) {
-            if (question.getShield() == 1) {
+            if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 1) {
                 question.setShield(0);
                 questionDao.questionShield(question);
                 return 1;
@@ -188,7 +188,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int whitelistQuestion(Question question) {
         if (questionDao.isQuestionExist(question.getQuestionId())) {
-            if (question.getShield() == 0) {
+            if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 0) {
                 question.setShield(1);
                 questionDao.questionShield(question);
                 return 1;
@@ -210,7 +210,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int blacklistQuestions(List<Question> questionList) {
         for (int i = questionList.size(); i > 0; i--) {
-            if (questionList.get(i - 1).getShield() == 1) {
+            if (questionDao.findQuestionById(questionList.get(i - 1).getQuestionId()).getShield() == 1) {
                 questionList.get(i - 1).setShield(0);
                 questionDao.questionShield(questionList.get(i - 1));
             }
@@ -228,7 +228,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int whitelistQuestions(List<Question> questionList) {
         for (int i = questionList.size(); i > 0; i--) {
-            if (questionList.get(i - 1).getShield() == 0) {
+            if (questionDao.findQuestionById(questionList.get(i - 1).getQuestionId()).getShield() == 0) {
                 questionList.get(i - 1).setShield(1);
                 questionDao.questionShield(questionList.get(i - 1));
             }
