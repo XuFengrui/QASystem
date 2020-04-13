@@ -36,8 +36,7 @@ public class QuestionController {
     @PostMapping(value = "/question/all")
     @ResponseBody
     public List<Question> questionAll() {
-        return questionService.findAllQuestion();
-//        return questionService.findWhiteQuestionByTimeOrder();
+        return questionService.findWhiteQuestionByTimeOrder();
     }
 
     /**
