@@ -91,7 +91,7 @@ public class AnswerServiceImpl implements AnswerService {
     **/
     @Override
     public int updateAnswer(Answer answer) {
-        if (answerDao.isAnswerExist(answer.getaAnswerId())) {
+        if (answerDao.isAnswerExist(answer.getAnswerId())) {
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
