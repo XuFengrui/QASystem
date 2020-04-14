@@ -93,13 +93,13 @@ public class AnswerServiceImpl implements AnswerService {
     public int updateAnswer(Answer answer) {
         if (answerDao.isAnswerExist(answer.getAnswerId())) {
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
-                if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
-                    if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
+                if (questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()).getShield() == 1) {
+                    if (questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
                             questionDao.updateQuestion(questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()));
                             return answerDao.updateAnswer(answer);
                         } else if ( answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId() == 0 || answerDao.findAnswerById(answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId()).getShield() == 1) {
-                            questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
+                            questionDao.updateQuestion(questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()));
                             return answerDao.updateAnswer(answer);
                         } else {
                             return -4;
