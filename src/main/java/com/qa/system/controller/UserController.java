@@ -168,6 +168,7 @@ public class UserController {
     public int userUpdate(@RequestBody User user) {
         return userService.updateUser(user);
     }
+
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

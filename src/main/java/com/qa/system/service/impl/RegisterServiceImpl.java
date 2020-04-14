@@ -7,6 +7,7 @@ import com.qa.system.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -115,9 +116,16 @@ public class RegisterServiceImpl implements RegisterService {
         }
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有未注册成功的用户信息，返回register类数组
+    * @Date 22:09 2020/4/14
+    * @Param [] 注册用户的电话号码
+    * @return com.qa.system.entity.Register
+    **/
     @Override
     public List<Register> findNotPassedRegister() {
-        List<Register> registerList = null;
+        List<Register> registerList = new ArrayList<>();
         List<Register> registers = registerDao.findAllRegister();
         for (int i = registers.size(); i > 0; i--) {
             if (!userDao.isUserExistByPhone(registers.get(i - 1).getPhone())) {

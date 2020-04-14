@@ -49,7 +49,7 @@ public class AdminController {
 
     /**
     * @Author XuFengrui
-    * @Description 查询所有用户的注册信息
+    * @Description 查询所有未通过的用户注册信息
     * @Date 23:57 2020/4/2
     * @Param [] 无
     * @return java.util.List<com.qa.system.entity.Register> 注册类数组
