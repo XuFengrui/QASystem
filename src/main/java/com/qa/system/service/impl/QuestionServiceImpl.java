@@ -103,7 +103,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int updateQuestion(Question question) {
         if (questionDao.isQuestionExist(question.getQuestionId())) {
-            if (question.getShield() == 0) {
+            if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 0) {
                 return 0;
             } else {
                 return questionDao.updateQuestion(question);
@@ -146,7 +146,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int deleteQuestionById(int id) {
         if(questionDao.isQuestionExist(id)){
-            if (findQuestionById(id).getShield() == 0) {
+            if (questionDao.findQuestionById(id).getShield() == 0) {
                 return 0;
             } else {
                 return questionDao.deleteQuestionById(id);

@@ -104,7 +104,7 @@ public class UserController {
     * @Description 修改回答
     * @Date 23:40 2020/4/2
     * @Param [answer] 回答类
-    * @return int 0表示失败，1表示成功
+    * @return int 若回答编号不存在则返回-1；若回答已被屏蔽返回0；若回答的问题已被屏蔽返回-2，若回答的问题已被终结返回-3，若回答的回答已被屏蔽返回-4，若更改成功则返回1
     **/
     @CrossOrigin
     @PostMapping(value = "/user/AnswerUpdate")
@@ -153,6 +153,20 @@ public class UserController {
     @ResponseBody
     public User userFindByName(@RequestBody User user) {
         return userService.findUserByName(user.getName());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 更改用户信息
+    * @Date 16:05 2020/4/14
+    * @Param [user] 用户类
+    * @return int -1表示该用户不存在,1表示成功，0表示失败
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/update")
+    @ResponseBody
+    public int userUpdate(@RequestBody User user) {
+        return userService.updateUser(user);
     }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
