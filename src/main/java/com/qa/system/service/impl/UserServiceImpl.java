@@ -68,6 +68,18 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
+    * @Description 根据用户名查询用户，存在则返回该用户类，不存在返回null
+    * @Date 11:17 2020/4/14
+    * @Param [name]
+    * @return com.qa.system.entity.User
+    **/
+    @Override
+    public User findUserByName(String name) {
+        return userDao.findUserByName(name);
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 更改用户信息,-1表示该用户不存在
     * @Date 16:41 2020/3/29
     * @Param [phone, user]

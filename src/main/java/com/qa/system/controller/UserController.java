@@ -143,16 +143,16 @@ public class UserController {
 
     /**
     * @Author XuFengrui
-    * @Description 根据号码查询用户
+    * @Description 根据用户名查询用户
     * @Date 21:03 2020/4/13
-    * @Param [user] 电话号码
+    * @Param [user] 用户名
     * @return com.qa.system.entity.User 存在则返回该用户类，不存在则返回null
     **/
     @CrossOrigin
     @PostMapping(value = "/user/query")
     @ResponseBody
-    public User userFindByPhone(@RequestBody User user) {
-        return userService.findUserByPhone(user.getPhone());
+    public User userFindByName(@RequestBody User user) {
+        return userService.findUserByName(user.getName());
     }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {

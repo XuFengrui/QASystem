@@ -4,6 +4,7 @@ import com.qa.system.dao.AdminDao;
 import com.qa.system.entity.Admin;
 import com.qa.system.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Indexed;
 import org.springframework.stereotype.Service;
 
 /**
@@ -91,12 +92,33 @@ public class AdminServiceImpl implements AdminService {
     public int loginAdmin(Admin admin) {
         if (adminDao.isAdminExist(admin.getName())) {
             if (adminDao.findAdminByName(admin.getName()).getPassword().equals(admin.getPassword())) {
-                if (admin.getStatus() == 0) {
+                if (adminDao.findAdminByName(admin.getName()).getStatus() == 0) {
                     admin.setStatus(1);
-                    return adminDao.updateAdmin(admin);
+                    return adminDao.updateAdminStatus(admin);
                 } else {
                     return -2;
                 }
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 管理员退出登录，登陆状态码归0，-1表示该账号不存在，0表示该账号登录状态码已归0，1表示退出登录成功
+    * @Date 11:26 2020/4/14
+    * @Param [admin]
+    * @return int
+    **/
+    @Override
+    public int exitAdmin(Admin admin) {
+        if (adminDao.isAdminExist(admin.getName())) {
+            if (adminDao.findAdminByName(admin.getName()).getStatus() == 1) {
+                admin.setStatus(0);
+                return adminDao.updateAdminStatus(admin);
             } else {
                 return 0;
             }

@@ -85,4 +85,17 @@ public class AdminDao {
         return findAdminByName(name) != null;
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 根据管理者账号改变登录状态
+    * @Date 11:11 2020/4/14
+    * @Param [admin]
+    * @return int
+    **/
+    public int updateAdminStatus(Admin admin) {
+        int count = jdbcTemplate.update("update admin set status = ? where name = ?",admin.getStatus(),admin.getName());
+        return count;
+    }
+
+
 }

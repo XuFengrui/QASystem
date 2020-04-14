@@ -17,5 +17,6 @@ public interface AdminService {
     public int addAdmin(Admin admin);
     public int deleteAdminByName(String name);
     public int loginAdmin(Admin admin);
+    public int exitAdmin(Admin admin);
 
 }

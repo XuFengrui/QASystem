@@ -201,4 +201,19 @@ public class AdminController {
         return adminService.loginAdmin(admin);
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 管理员退出登录，登陆状态码归0
+    * @Date 11:28 2020/4/14
+    * @Param [admin] 管理员的账号
+    * @return int -1表示该账号不存在，0表示该账号登录状态码已归0，1表示退出登录成功
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/exit")
+    @ResponseBody
+    public int adminExit(@RequestBody Admin admin) {
+        return adminService.exitAdmin(admin);
+    }
+
+
 }
