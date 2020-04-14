@@ -88,7 +88,7 @@ public class AnswerDao {
     * @return int
     **/
     public int updateAnswer(Answer answer) {
-        int count = jdbcTemplate.update("update answer set details = ?,answerer = ?,aQuestionId = ?,aAnswerId = ?,shield = ?,time = ? where answerId = ?",answer.getDetails(),answer.getAnswerer(),answer.getaQuestionId(),answer.getaAnswerId(),answer.getShield(), FormatChange.dateTimeChange(new Date()),answer.getAnswerId());
+        int count = jdbcTemplate.update("update answer set details = ?,time = ? where answerId = ?",answer.getDetails(),FormatChange.dateTimeChange(new Date()),answer.getAnswerId());
         return count;
     }
 

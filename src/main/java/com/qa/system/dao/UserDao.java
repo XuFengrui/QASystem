@@ -86,7 +86,7 @@ public class UserDao {
     **/
     public int updateUser(User user){
 
-        int count = jdbcTemplate.update("update user set name = ?,password = ?,sex = ?,age = ?,shield = ? where phone = ?",user.getName(),user.getPassword(),user.getSex(),user.getAge(),user.getShield(),user.getPhone());
+        int count = jdbcTemplate.update("update user set name = ?,sex = ?,age = ? where phone = ?",user.getName(),user.getSex(),user.getAge(),user.getPhone());
         return count;
     }
 
