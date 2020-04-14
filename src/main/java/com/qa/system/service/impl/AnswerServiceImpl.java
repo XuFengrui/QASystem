@@ -96,9 +96,9 @@ public class AnswerServiceImpl implements AnswerService {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
-                            questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
+                            questionDao.updateQuestion(questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()));
                             return answerDao.updateAnswer(answer);
-                        } else if (answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
+                        } else if ( answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId() == 0 || answerDao.findAnswerById(answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId()).getShield() == 1) {
                             questionDao.updateQuestion(questionDao.findQuestionById(answer.getaQuestionId()));
                             return answerDao.updateAnswer(answer);
                         } else {
