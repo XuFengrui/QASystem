@@ -177,7 +177,8 @@ public class UserServiceImpl implements UserService {
             user.setPassword(register.getPassword());
             user.setSex(register.getSex());
             user.setAge(register.getAge());
-            AliyunSmsUtils.sendSuccess(register.getPhone(),register.getName());
+            AliyunSmsUtils.sendSms(register.getPhone(),"6666");
+//            AliyunSmsUtils.sendSuccess(register.getPhone(),register.getName());
             return addUser(user);
         }else {
             return -1;
