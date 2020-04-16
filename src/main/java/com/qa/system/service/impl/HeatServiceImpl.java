@@ -6,6 +6,7 @@ import com.qa.system.entity.Heat;
 import com.qa.system.entity.Question;
 import com.qa.system.service.HeatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sun.plugin2.main.server.HeartbeatThread;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * @Date 2020/4/16
  * @Version 1.0
  **/
+@Service
 public class HeatServiceImpl implements HeatService {
 
     @Autowired

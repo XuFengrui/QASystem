@@ -7,6 +7,7 @@ import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  * @Date 2020/4/15
  * @Version 1.0
  **/
+@Repository
 public class HeatDao {
 
     @Autowired

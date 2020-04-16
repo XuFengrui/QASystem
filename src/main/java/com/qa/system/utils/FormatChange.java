@@ -5,6 +5,13 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @ClassName FormatChange
+ * @Description DOTO
+ * @Author XuFengrui
+ * @date 2020/4/16
+ * @Version 1.0
+ **/
 @Component
 public class FormatChange {
 
