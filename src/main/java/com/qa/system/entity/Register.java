@@ -14,6 +14,7 @@ public class Register {
     private String password;
     private int sex;
     private int age;
+    private String mail;
 
     public String getPhone() {
         return phone;
@@ -55,4 +56,11 @@ public class Register {
         this.age = age;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

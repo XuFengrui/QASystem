@@ -71,7 +71,7 @@ public class RegisterDao {
     **/
     public int updateRegister(Register register){
 
-        int count = jdbcTemplate.update("update register set name = ?,password = ?,sex = ?,age = ? where phone = ?",register.getName(),register.getPassword(),register.getSex(),register.getAge(),register.getPhone());
+        int count = jdbcTemplate.update("update register set name = ?,password = ?,sex = ?,age = ?,mail = ? where phone = ?",register.getName(),register.getPassword(),register.getSex(),register.getAge(),register.getMail(),register.getPhone());
         return count;
     }
 
@@ -84,7 +84,7 @@ public class RegisterDao {
     **/
     public int addRegister(Register register){
 
-        int count = jdbcTemplate.update("insert into register(phone,name,password,sex,age) values(?,?,?,?,?)",register.getPhone(),register.getName(),register.getPassword(),register.getSex(),register.getAge());
+        int count = jdbcTemplate.update("insert into register(phone,name,password,sex,age,mail) values(?,?,?,?,?,?)",register.getPhone(),register.getName(),register.getPassword(),register.getSex(),register.getAge(),register.getMail());
         return count;
     }
 

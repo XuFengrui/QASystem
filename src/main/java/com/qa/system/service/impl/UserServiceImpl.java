@@ -9,6 +9,7 @@ import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
 import com.qa.system.service.UserService;
 import com.qa.system.utils.AliyunSmsUtils;
+import com.qa.system.utils.SendMailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     AnswerService answerService;
+
+    @Autowired
+    SendMailUtils sendMailUtils;
 
     /**
     * @Author XuFengrui
@@ -177,8 +181,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(register.getPassword());
             user.setSex(register.getSex());
             user.setAge(register.getAge());
-            AliyunSmsUtils.verificationCode(register.getPhone());
-//            AliyunSmsUtils.sendSuccess(register.getPhone(),register.getName());
+            sendMailUtils.sendSuccessRegisterMail(register.getMail(),register.getName());
             return addUser(user);
         }else {
             return -1;
