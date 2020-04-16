@@ -80,4 +80,18 @@ public class QuestionController {
     public Question questionFindById(@RequestBody Question question) {
         return questionService.findQuestionById(question.getQuestionId());
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 将问题按照热度的倒序排列
+    * @Date 10:39 2020/4/16
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.Question> 问题类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/question/heat")
+    @ResponseBody
+    public List<Question> sortQuestionByHeat() {
+        return questionService.sortQuestionByHeat();
+    }
 }

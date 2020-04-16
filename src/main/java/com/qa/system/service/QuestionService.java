@@ -26,5 +26,5 @@ public interface QuestionService {
     public int blacklistQuestions(List<Question> questionList);
     public int whitelistQuestions(List<Question> questionList);
     public int endQuestion(Question question);
-    public int updateHeatOfQuestion(Question question);
+    public List<Question> sortQuestionByHeat();
 }

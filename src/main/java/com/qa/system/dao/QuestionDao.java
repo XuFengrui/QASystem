@@ -211,4 +211,16 @@ public class QuestionDao {
         int count = jdbcTemplate.update("update question set heat = ? where questionId = ?",question.getHeat(),question.getQuestionId());
         return count;
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 排序热点问题
+    * @Date 10:29 2020/4/16
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    public List<Question> sortQuestionByHeat() {
+        List<Question> questionList = jdbcTemplate.query("select * from question order by heat desc",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
+        return questionList;
+    }
 }

@@ -262,17 +262,13 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
-    * @Description 修改问题的热度属性，-1表示该问题不存在
-    * @Date 10:02 2020/4/16
-    * @Param [question]
-    * @return int
+    * @Description 将所有问题按照热度降序排列
+    * @Date 10:34 2020/4/16
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Question>
     **/
     @Override
-    public int updateHeatOfQuestion(Question question) {
-        if (questionDao.isQuestionExist(question.getQuestionId())) {
-            return questionDao.updateHeatOfQuestion(question);
-        } else {
-            return -1;
-        }
+    public List<Question> sortQuestionByHeat() {
+        return questionDao.sortQuestionByHeat();
     }
 }
