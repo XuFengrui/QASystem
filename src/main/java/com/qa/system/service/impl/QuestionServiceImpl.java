@@ -1,9 +1,9 @@
 package com.qa.system.service.impl;
 
 import com.qa.system.dao.AnswerDao;
+import com.qa.system.dao.HeatDao;
 import com.qa.system.dao.QuestionDao;
 import com.qa.system.dao.UserDao;
-import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
 import com.qa.system.service.QuestionService;
 import com.qa.system.utils.TimeSort;
@@ -30,6 +30,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     AnswerDao answerDao;
+
+    @Autowired
+    HeatDao heatDao;
 
     /**
     * @Author XuFengrui
@@ -252,6 +255,22 @@ public class QuestionServiceImpl implements QuestionService {
             } else {
                 return 0;
             }
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改问题的热度属性，-1表示该问题不存在
+    * @Date 10:02 2020/4/16
+    * @Param [question]
+    * @return int
+    **/
+    @Override
+    public int updateHeatOfQuestion(Question question) {
+        if (questionDao.isQuestionExist(question.getQuestionId())) {
+            return questionDao.updateHeatOfQuestion(question);
         } else {
             return -1;
         }

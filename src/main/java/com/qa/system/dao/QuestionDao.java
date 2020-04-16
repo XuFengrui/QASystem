@@ -198,4 +198,17 @@ public class QuestionDao {
         int count = jdbcTemplate.update("update question set end = ? where questionId = ?",question.getEnd(),question.getQuestionId());
         return count;
     }
+
+
+    /**
+    * @Author XuFengrui
+    * @Description 改变问题的热度，失败返回0，成功返回1
+    * @Date 9:58 2020/4/16
+    * @Param [question]
+    * @return int
+    **/
+    public int updateHeatOfQuestion(Question question) {
+        int count = jdbcTemplate.update("update question set heat = ? where questionId = ?",question.getHeat(),question.getQuestionId());
+        return count;
+    }
 }
