@@ -106,6 +106,7 @@ public class QuestionController {
     @PostMapping(value = "/question/search")
     @ResponseBody
     public List<Question> findQuestionsByKeyword(@RequestParam(value = "strWord", required = false) String strWord) {
+        System.out.println(strWord);
         return questionService.findQuestionsByKeyword(strWord);
     }
 }
