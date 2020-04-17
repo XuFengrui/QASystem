@@ -105,7 +105,7 @@ public class QuestionController {
     @CrossOrigin
     @PostMapping(value = "/question/search")
     @ResponseBody
-    public List<Question> findQuestionsByKeyword(@RequestParam(value = "strWord", required = false) String strWord) {
+    public List<Question> findQuestionsByKeyword(@RequestBody String strWord) {
         System.out.println(strWord);
         return questionService.findQuestionsByKeyword(strWord);
     }
