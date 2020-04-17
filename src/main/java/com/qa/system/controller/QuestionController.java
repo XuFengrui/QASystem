@@ -94,4 +94,18 @@ public class QuestionController {
     public List<Question> sortQuestionByHeat() {
         return questionService.sortQuestionByHeat();
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 问题的关键词搜索
+    * @Date 9:37 2020/4/17
+    * @Param [] 关键词（String）
+    * @return java.util.List<com.qa.system.entity.Question> 问题类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/question/search")
+    @ResponseBody
+    public List<Question> findQuestionsByKeyword(String strWord) {
+        return questionService.findQuestionsByKeyword(strWord);
+    }
 }

@@ -68,8 +68,8 @@ public class QuestionServiceImpl implements QuestionService {
     * @return java.util.List<com.qa.system.entity.Question>
     **/
     @Override
-    public List<Question> findQuestionsByKeyword(String string) {
-        return questionDao.findQuestionsByKeyword(string);
+    public List<Question> findQuestionsByKeyword(String strWord) {
+        return questionDao.findQuestionsByKeyword(strWord);
     }
 
     /**

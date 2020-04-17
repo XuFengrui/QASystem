@@ -170,8 +170,8 @@ public class QuestionDao {
     * @Param [string]
     * @return java.util.List<com.qa.system.entity.Question>
     **/
-    public List<Question> findQuestionsByKeyword(String string) {
-        List<Question> questionList = jdbcTemplate.query("select * from question where (details like ? or label like ? or questioner like ?) and shield = ?",new Object[]{"%"+string+"%","%"+string+"%","%"+string+"%",1},new BeanPropertyRowMapper<>(Question.class));
+    public List<Question> findQuestionsByKeyword(String strWord) {
+        List<Question> questionList = jdbcTemplate.query("select * from question where (details like ? or label like ? or questioner like ?) and shield = ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%",1},new BeanPropertyRowMapper<>(Question.class));
         return questionList;
     }
 
