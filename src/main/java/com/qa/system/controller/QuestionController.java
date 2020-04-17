@@ -107,6 +107,7 @@ public class QuestionController {
     @ResponseBody
     public List<Question> findQuestionsByKeyword(@RequestBody String strWord) {
         System.out.println(strWord);
+        System.out.println(strWord.toString());
         return questionService.findQuestionsByKeyword(strWord);
     }
 }
