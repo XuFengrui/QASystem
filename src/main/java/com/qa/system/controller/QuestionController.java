@@ -84,7 +84,7 @@ public class QuestionController {
     /**
     * @Author XuFengrui
     * @Description 将问题按照热度的倒序排列
-    * @Date 10:39 2020/4/16
+    * @Date 10:39 2020/4/16 
     * @Param [] 无
     * @return java.util.List<com.qa.system.entity.Question> 问题类数组
     **/
@@ -105,7 +105,7 @@ public class QuestionController {
     @CrossOrigin
     @PostMapping(value = "/question/search")
     @ResponseBody
-    public List<Question> findQuestionsByKeyword(String strWord) {
+    public List<Question> findQuestionsByKeyword(@RequestParam(value = "strWord", required = false) String strWord) {
         return questionService.findQuestionsByKeyword(strWord);
     }
 }
