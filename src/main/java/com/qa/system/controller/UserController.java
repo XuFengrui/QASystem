@@ -53,8 +53,8 @@ public class UserController {
     @CrossOrigin
     @PostMapping(value = "/user/loginCode")
     @ResponseBody
-    public String userLoginByCode(@RequestBody String phone) throws ClientException {
-        return userService.loginUserByAuthCode(phone);
+    public String userLoginByCode(@RequestBody User user) throws ClientException {
+        return userService.loginUserByAuthCode(user.getPhone());
     }
 
     /**
