@@ -143,16 +143,16 @@ public class UserController {
 
     /**
     * @Author XuFengrui
-    * @Description 根据用户名查询用户
+    * @Description 根据电话号码查询用户
     * @Date 21:03 2020/4/13
-    * @Param [user] 用户名
+    * @Param [user] 电话号码
     * @return com.qa.system.entity.User 存在则返回该用户类，不存在则返回null
     **/
     @CrossOrigin
     @PostMapping(value = "/user/query")
     @ResponseBody
-    public User userFindByName(@RequestBody User user) {
-        return userService.findUserByName(user.getName());
+    public User userFindByPhone(@RequestBody User user) {
+        return userService.findUserByPhone(user.getPhone());
     }
 
     /**
@@ -169,6 +169,19 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 根据用户名查询电话号码（主键）
+    * @Date 8:15 2020/4/21
+    * @Param [user] 电话号码
+    * @return java.lang.String null表示该用户不存在，若存在则返回电话号码（String）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/getPhoneByName")
+    @ResponseBody
+    public String queryPhoneByName(@RequestBody User user) {
+        return userService.queryPhoneByName(user.getName());
+    }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

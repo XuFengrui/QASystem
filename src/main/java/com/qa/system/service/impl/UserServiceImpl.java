@@ -84,6 +84,22 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
+    * @Description 根据用户名返回用户号码（主键）
+    * @Date 8:13 2020/4/21
+    * @Param [name]
+    * @return java.lang.String
+    **/
+    @Override
+    public String queryPhoneByName(String name) {
+        if (userDao.findUserByName(name) != null) {
+            return userDao.findUserByName(name).getPhone();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 更改用户信息,-1表示该用户不存在
     * @Date 16:41 2020/3/29
     * @Param [phone, user]

@@ -19,6 +19,7 @@ public interface UserService {
     public List<User> findAllUser();
     public User findUserByPhone(String phone);
     public User findUserByName(String name);
+    public String queryPhoneByName(String name);
     public int updateUser(User user);
     public int addUser(User user);
     public int deleteUserByPhone(String phone);
