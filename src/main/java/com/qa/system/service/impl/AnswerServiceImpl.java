@@ -172,9 +172,9 @@ public class AnswerServiceImpl implements AnswerService {
         if (answerDao.isAnswerExist(id)) {
             Answer answer = answerDao.findAnswerById(id);
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
-                if (questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()).getShield() == 1) {
+                if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
-                        if (!answerDao.isAAnswerExist(answer.getAnswerId()) || answerDao.findAnswerById(answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId()).getShield() == 1) {
+                        if (!answerDao.isAAnswerExist(answer.getAnswerId()) || answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
                             return answerDao.deleteAnswerById(id);
                         } else {
                             return -4;
