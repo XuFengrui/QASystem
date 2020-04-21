@@ -34,4 +34,32 @@ public class AnswerController {
     public int answerAdd(@RequestBody Answer answer) {
         return answerService.addAnswer(answer);
     }
+
+    /**
+     * @Author XuFengrui
+     * @Description 修改回答
+     * @Date 23:40 2020/4/2
+     * @Param [answer] 回答类
+     * @return int 若回答编号不存在则返回-1；若回答已被屏蔽返回0；若回答的问题已被屏蔽返回-2，若回答的问题已被终结返回-3，若回答的回答已被屏蔽返回-4，若更改成功则返回1
+     **/
+    @CrossOrigin
+    @PostMapping(value = "/answer/update")
+    @ResponseBody
+    public int answerUpdate(@RequestBody Answer answer) {
+        return answerService.updateAnswer(answer);
+    }
+
+    /**
+     * @Author XuFengrui
+     * @Description 删除回答
+     * @Date 23:42 2020/4/2
+     * @Param [answer] 回答编号
+     * @return int 0表示失败，1表示成功
+     **/
+    @CrossOrigin
+    @PostMapping(value = "/answer/delete")
+    @ResponseBody
+    public int answerDelete(@RequestBody Answer answer) {
+        return answerService.deleteAnswerById(answer.getAnswerId());
+    }
 }
