@@ -28,6 +28,7 @@ public interface UserService {
     public int registerUser(Register register) throws ClientException;
     public int blacklistUser(User user);
     public int whitelistUser(User user);
+    public boolean saveIcon(User user);
 
 
 }

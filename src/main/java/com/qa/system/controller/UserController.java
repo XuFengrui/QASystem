@@ -154,6 +154,24 @@ public class UserController {
     public String queryPhoneByName(@RequestBody User user) {
         return userService.queryPhoneByName(user.getName());
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 用户上传头像
+    * @Date 11:59 2020/4/22
+    * @Param [user] 头像图片，电话号码
+    * @return int 0表示失败，1表示成功
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/uploadIcon")
+    @ResponseBody
+    public int saveIcon(@RequestBody User user) {
+        if (userService.saveIcon(user)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

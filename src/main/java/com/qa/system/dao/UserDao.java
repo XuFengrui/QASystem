@@ -29,7 +29,6 @@ public class UserDao {
     * @return com.qa.system.entity.User
     **/
     public User findUserByPhone(String phone){
-
         List<User> userList = jdbcTemplate.query("select * from user where phone = ?",new BeanPropertyRowMapper<>(User.class),phone);
         if(userList.size()>0){
             return userList.get(0);
@@ -68,7 +67,6 @@ public class UserDao {
     * @return java.util.List<com.qa.system.entity.User>
     **/
     public List<User> findAllUser(){
-
         List<User> userList = jdbcTemplate.query("select * from user",new Object[]{},new BeanPropertyRowMapper<>(User.class));
         if(userList.size()>0){
             return userList;
@@ -85,7 +83,6 @@ public class UserDao {
     * @return int
     **/
     public int updateUser(User user){
-
         int count = jdbcTemplate.update("update user set name = ?,sex = ?,age = ? where phone = ?",user.getName(),user.getSex(),user.getAge(),user.getPhone());
         return count;
     }
@@ -98,7 +95,6 @@ public class UserDao {
     * @return int
     **/
     public int addUser(User user){
-
         int count = jdbcTemplate.update("insert into user(phone,name,password,sex,age,shield) values(?,?,?,?,?,?)",user.getPhone(),user.getName(),user.getPassword(),user.getSex(),user.getAge(),user.getShield());
         return count;
     }
@@ -111,7 +107,6 @@ public class UserDao {
     * @return int
     **/
     public int deleteUserByPhone(String phone){
-
         int count = jdbcTemplate.update("delete from user where phone = ?",phone);
         return count;
     }
@@ -179,5 +174,16 @@ public class UserDao {
         return count;
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 修改用户头像
+    * @Date 11:54 2020/4/22
+    * @Param [user]
+    * @return int
+    **/
+    public int updateUserIcon(User user){
+        int count = jdbcTemplate.update("update user set icon = ? where phone = ?",user.getIcon(),user.getPhone());
+        return count;
+    }
 
 }

@@ -188,12 +188,12 @@ public class AdminController {
     }
 
     /**
-    * @Author XuFengrui
-    * @Description 管理员登录
-    * @Date 20:59 2020/4/13
-    * @Param [admin] 管理员的账号和密码
-    * @return int -1表示该账号不存在，0表示账号或密码错误，-2表示该账号已被登录，1表示登录成功
-    **/
+     * @Author XuFengrui
+     * @Description 管理员登录
+     * @Date 20:59 2020/4/13
+     * @Param [admin] 管理员的账号和密码
+     * @return int -1表示该账号不存在，0表示账号或密码错误，-2表示该账号已被登录，1表示登录成功
+     **/
     @CrossOrigin
     @PostMapping(value = "/admin/login")
     @ResponseBody
@@ -202,12 +202,12 @@ public class AdminController {
     }
 
     /**
-    * @Author XuFengrui
-    * @Description 管理员退出登录，登陆状态码归0
-    * @Date 11:28 2020/4/14
-    * @Param [admin] 管理员的账号
-    * @return int -1表示该账号不存在，0表示该账号登录状态码已归0，1表示退出登录成功
-    **/
+     * @Author XuFengrui
+     * @Description 管理员退出登录，登陆状态码归0
+     * @Date 11:28 2020/4/14
+     * @Param [admin] 管理员的账号
+     * @return int -1表示该账号不存在，0表示该账号登录状态码已归0，1表示退出登录成功
+     **/
     @CrossOrigin
     @PostMapping(value = "/admin/exit")
     @ResponseBody

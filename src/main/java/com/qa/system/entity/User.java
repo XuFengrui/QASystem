@@ -15,6 +15,7 @@ public class User {
     private int sex;
     private int age;
     private int shield;
+    private String icon;
 
     public String getPhone() {
         return phone;
@@ -64,5 +65,11 @@ public class User {
         this.shield = shield;
     }
 
+    public String getIcon() {
+        return icon;
+    }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

@@ -1,6 +1,7 @@
 package com.qa.system.service.impl;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.qa.system.dao.*;
 import com.qa.system.entity.Admin;
 import com.qa.system.entity.Register;
@@ -9,6 +10,7 @@ import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
 import com.qa.system.service.UserService;
 import com.qa.system.utils.AliyunSmsUtils;
+import com.qa.system.utils.Base64Utils;
 import com.qa.system.utils.SendMailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -251,7 +253,30 @@ public class UserServiceImpl implements UserService {
         } else {
             return -1;
         }
-
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 上传用户头像
+    * @Date 11:57 2020/4/22
+    * @Param [user]
+    * @return boolean
+    **/
+    @Override
+    public boolean saveIcon(User user) {
+        try {
+            String str = user.getIcon().substring((user.getIcon().indexOf(",") + 1));
+            String imgPath = "E:/icon/" + System.currentTimeMillis() + ".png";
+            Base64Utils.generateImage(str, imgPath);
+            user.setIcon(imgPath);
+            if (userDao.updateUserIcon(user) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
