@@ -1,6 +1,5 @@
 package com.qa.system.utils;
 
-import jdk.nashorn.internal.runtime.UnwarrantedOptimismException;
 import org.springframework.stereotype.Component;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
