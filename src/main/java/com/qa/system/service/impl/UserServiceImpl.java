@@ -266,7 +266,7 @@ public class UserServiceImpl implements UserService {
     public boolean saveIcon(User user) {
         try {
             String str = user.getIcon().substring((user.getIcon().indexOf(",") + 1));
-            String imgPath = "E:/icon/" + System.currentTimeMillis() + ".png";
+            String imgPath = "D:/icon/" + System.currentTimeMillis() + ".png";
             Base64Utils.generateImage(str, imgPath);
             user.setIcon(imgPath);
             if (userDao.updateUserIcon(user) > 0) {

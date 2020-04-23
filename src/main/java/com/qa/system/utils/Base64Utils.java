@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
@@ -70,6 +71,33 @@ public class Base64Utils {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 读取图片
+    * @Date 20:26 2020/4/23
+    * @Param [imgPath, response]
+    * @return void
+    **/
+    public void showImage(String imgPath, HttpServletResponse response) {
+        //查询当前登录用户图片地址
+        File imgFile = new File(imgPath);
+        FileInputStream fin = null;
+        OutputStream output = null;
+        try {
+            output = response.getOutputStream();
+            fin = new FileInputStream(imgFile);
+            byte[] arr = new byte[1024 * 10];
+            int n;
+            while ((n = fin.read(arr)) != -1) {
+                output.write(arr, 0, n);
+            }
+            output.flush();
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
