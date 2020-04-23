@@ -289,7 +289,7 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public String showIcon(User user) {
-        if (userDao.isUserExistByPhone(user.getPhone())) {
+        if (!userDao.isUserExistByPhone(user.getPhone())) {
             return null;
         } else {
             return userDao.findUserByPhone(user.getPhone()).getIcon();
