@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebAppConfigUtils extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("D:/icon/**").addResourceLocations("file:D:/icon");
+        registry.addResourceHandler("D:/icon/**").addResourceLocations("file:D:/icon/");
         super.addResourceHandlers(registry);
     }
 }
