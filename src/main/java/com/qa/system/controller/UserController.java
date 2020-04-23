@@ -172,6 +172,20 @@ public class UserController {
             return 0;
         }
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 显示用户头像
+    * @Date 20:58 2020/4/23
+    * @Param [user] 电话号码
+    * @return java.lang.String 头像存储的路径（String）,若用户不存在，则返回null
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/downloadIcon")
+    @ResponseBody
+    public String showIcon(@RequestBody User user) {
+        return userService.showIcon(user);
+    }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

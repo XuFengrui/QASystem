@@ -6,6 +6,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Objects;
 
 /**
  * @ClassName Base64Utils
@@ -25,11 +26,10 @@ public class Base64Utils {
     * @return java.lang.String
     **/
     public static String getImageStr(String imgPath) {
-        InputStream inputStream = null;
-        //读取图片的字节数组
         byte[] data = null;
+        //读取图片的字节数组
         try {
-            inputStream = new FileInputStream(imgPath);
+            InputStream inputStream = new FileInputStream(imgPath);
             data = new byte[inputStream.available()];
             inputStream.read(data);
             inputStream.close();
@@ -38,7 +38,7 @@ public class Base64Utils {
         }
         //对字节数组进行Base64编码
         BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(data);
+        return encoder.encode(Objects.requireNonNull(data));
     }
 
     /**
@@ -71,33 +71,6 @@ public class Base64Utils {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }
-    }
-
-    /**
-    * @Author XuFengrui
-    * @Description 读取图片
-    * @Date 20:26 2020/4/23
-    * @Param [imgPath, response]
-    * @return void
-    **/
-    public void showImage(String imgPath, HttpServletResponse response) {
-        //查询当前登录用户图片地址
-        File imgFile = new File(imgPath);
-        FileInputStream fin = null;
-        OutputStream output = null;
-        try {
-            output = response.getOutputStream();
-            fin = new FileInputStream(imgFile);
-            byte[] arr = new byte[1024 * 10];
-            int n;
-            while ((n = fin.read(arr)) != -1) {
-                output.write(arr, 0, n);
-            }
-            output.flush();
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

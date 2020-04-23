@@ -279,4 +279,20 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询用户头像
+    * @Date 21:01 2020/4/23
+    * @Param [user]
+    * @return java.lang.String
+    **/
+    @Override
+    public String showIcon(User user) {
+        if (userDao.isUserExistByPhone(user.getPhone())) {
+            return null;
+        } else {
+            return userDao.findUserByPhone(user.getPhone()).getIcon();
+        }
+    }
 }

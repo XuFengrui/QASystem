@@ -4,6 +4,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.qa.system.entity.Admin;
 import com.qa.system.entity.Register;
 import com.qa.system.entity.User;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public interface UserService {
     public int blacklistUser(User user);
     public int whitelistUser(User user);
     public boolean saveIcon(User user);
+    public String showIcon(User user);
 
 
 }
