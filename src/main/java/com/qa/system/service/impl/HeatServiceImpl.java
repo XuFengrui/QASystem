@@ -103,7 +103,7 @@ public class HeatServiceImpl implements HeatService {
             heatDao.addHeat(heat);
             Question question = questionDao.findQuestionById(heat.getQuestionId());
             question.setHeat(question.getHeat()+1);
-            return questionDao.updateQuestion(question);
+            return questionDao.updateHeatOfQuestion(question);
         }
     }
 }
