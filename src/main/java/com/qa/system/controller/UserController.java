@@ -206,8 +206,8 @@ public class UserController {
     * @Author XuFengrui
     * @Description 获取base64编码
     * @Date 11:14 2020/4/24
-    * @Param [user]
-    * @return java.lang.String
+    * @Param [user] 电话号码
+    * @return java.lang.String base编码（String）
     **/
     @CrossOrigin
     @PostMapping(value = "/user/getImageStr")
