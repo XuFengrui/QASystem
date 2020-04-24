@@ -68,7 +68,7 @@ public class QuestionServiceImpl implements QuestionService {
     * @return java.util.List<com.qa.system.entity.Question>
     **/
     @Override
-    public List<Question> findQuestionsByKeyword(String strWord) {
+    public List<Question> showQuestionsByKeyword(String strWord) {
         return questionDao.findQuestionsByKeyword(strWord);
     }
 
@@ -270,5 +270,17 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> sortQuestionByHeat() {
         return questionDao.sortQuestionByHeat();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询问题
+    * @Date 11:48 2020/4/24
+    * @Param [keyWord]
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    @Override
+    public List<Question> findQuestionsByKeyword(String keyWord) {
+        return questionDao.findQuestionsByKeyword(keyWord);
     }
 }

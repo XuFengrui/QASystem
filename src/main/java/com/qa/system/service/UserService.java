@@ -1,6 +1,7 @@
 package com.qa.system.service;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.qa.system.entity.Question;
 import com.qa.system.entity.Register;
 import com.qa.system.entity.User;
 
@@ -32,6 +33,7 @@ public interface UserService {
     public String showIcon(User user);
     public BufferedImage decodeToImage(User user);
     public String getImageStr(User user);
+    public List<User> findUsersByKeyword(String keyWord);
 
 
 }

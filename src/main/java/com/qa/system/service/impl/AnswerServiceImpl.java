@@ -286,4 +286,16 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> findAnswersByQuestionId(int id) {
         return answerDao.findAnswersByQuestionId(id);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询回答
+    * @Date 11:52 2020/4/24
+    * @Param [keyWord]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @Override
+    public List<Answer> findAnswersByKeyword(String keyWord) {
+        return answerDao.findAnswersByKeyword(keyWord);
+    }
 }

@@ -134,4 +134,16 @@ public class RegisterServiceImpl implements RegisterService {
         }
         return registerList;
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询注册用户
+    * @Date 11:49 2020/4/24
+    * @Param [keyWord]
+    * @return java.util.List<com.qa.system.entity.Register>
+    **/
+    @Override
+    public List<Register> findRegistersByKeyword(String keyWord) {
+        return registerDao.findRegistersByKeyword(keyWord);
+    }
 }

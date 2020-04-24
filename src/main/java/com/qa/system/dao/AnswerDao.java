@@ -209,4 +209,16 @@ public class AnswerDao {
         int count = jdbcTemplate.update("update answer set shield = ? where answerId = ?",answer.getShield(),answer.getAnswerId());
         return count;
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询回答
+    * @Date 11:45 2020/4/24
+    * @Param [strWord]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    public List<Answer> findAnswersByKeyword(String strWord) {
+        List<Answer> answerList = jdbcTemplate.query("select * from question where answerId like ? or details like ? or answerer like ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Answer.class));
+        return answerList;
+    }
 }

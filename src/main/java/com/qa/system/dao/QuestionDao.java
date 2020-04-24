@@ -1,6 +1,7 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Question;
+import com.qa.system.entity.Register;
 import com.qa.system.entity.User;
 import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,7 +171,7 @@ public class QuestionDao {
     * @Param [string]
     * @return java.util.List<com.qa.system.entity.Question>
     **/
-    public List<Question> findQuestionsByKeyword(String strWord) {
+    public List<Question> showQuestionsByKeyword(String strWord) {
         List<Question> questionList = jdbcTemplate.query("select * from question where (details like ? or label like ? or questioner like ?) and shield = ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%",1},new BeanPropertyRowMapper<>(Question.class));
         return questionList;
     }
@@ -221,6 +222,18 @@ public class QuestionDao {
     **/
     public List<Question> sortQuestionByHeat() {
         List<Question> questionList = jdbcTemplate.query("select * from question order by heat desc",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
+        return questionList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊搜索问题
+    * @Date 11:42 2020/4/24
+    * @Param [strWord]
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    public List<Question> findQuestionsByKeyword(String strWord) {
+        List<Question> questionList = jdbcTemplate.query("select * from question where questionId like ? or details like ? or questioner like ? or label like ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Question.class));
         return questionList;
     }
 }

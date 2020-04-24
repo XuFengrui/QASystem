@@ -1,5 +1,6 @@
 package com.qa.system.dao;
 
+import com.qa.system.entity.Question;
 import com.qa.system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -184,6 +185,18 @@ public class UserDao {
     public int updateUserIcon(User user){
         int count = jdbcTemplate.update("update user set icon = ? where phone = ?",user.getIcon(),user.getPhone());
         return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询用户
+    * @Date 11:34 2020/4/24
+    * @Param [strWord]
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    public List<User> findUsersByKeyword(String strWord) {
+        List<User> userList = jdbcTemplate.query("select * from user where phone like ? or name like ?",new Object[]{"%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(User.class));
+        return userList;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Register;
+import com.qa.system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -99,5 +100,17 @@ public class RegisterDao {
 
         int count = jdbcTemplate.update("delete from register where phone = ?",phone);
         return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询注册用户
+    * @Date 11:35 2020/4/24
+    * @Param [strWord]
+    * @return java.util.List<com.qa.system.entity.Register>
+    **/
+    public List<Register> findRegistersByKeyword(String strWord) {
+        List<Register> registerList = jdbcTemplate.query("select * from register where phone like ? or name like ? or mail = ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Register.class));
+        return registerList;
     }
 }

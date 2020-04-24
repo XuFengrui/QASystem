@@ -328,4 +328,16 @@ public class UserServiceImpl implements UserService {
             return Base64Utils.getImageStr(userDao.findUserByPhone(user.getPhone()).getIcon());
         }
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询用户
+    * @Date 11:51 2020/4/24
+    * @Param [keyWord]
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    @Override
+    public List<User> findUsersByKeyword(String keyWord) {
+        return userDao.findUsersByKeyword(keyWord);
+    }
 }

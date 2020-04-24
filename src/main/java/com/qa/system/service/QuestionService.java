@@ -15,7 +15,7 @@ public interface QuestionService {
 
     public List<Question> findAllQuestion();
     public List<Question> findWhiteQuestionByTimeOrder();
-    public List<Question> findQuestionsByKeyword(String string);
+    public List<Question> showQuestionsByKeyword(String string);
     public List<Question> findQuestionByUserName(String name);
     public Question findQuestionById(int id);
     public int updateQuestion(Question question);
@@ -27,4 +27,5 @@ public interface QuestionService {
     public int whitelistQuestions(List<Question> questionList);
     public int endQuestion(Question question);
     public List<Question> sortQuestionByHeat();
+    public List<Question> findQuestionsByKeyword(String keyWord);
 }

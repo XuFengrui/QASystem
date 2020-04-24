@@ -106,6 +106,7 @@ public class QuestionController {
     @PostMapping(value = "/question/search")
     @ResponseBody
     public List<Question> findQuestionsByKeyword(@RequestBody Question question) {
-        return questionService.findQuestionsByKeyword(question.getDetails());
+        return questionService.showQuestionsByKeyword(question.getDetails());
     }
+
 }

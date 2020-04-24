@@ -215,5 +215,60 @@ public class AdminController {
         return adminService.exitAdmin(admin);
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询用户
+    * @Date 11:59 2020/4/24
+    * @Param [admin]
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/queryUser")
+    @ResponseBody
+    public List<User> userQuery(@RequestBody Admin admin) {
+        return userService.findUsersByKeyword(admin.getName());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询注册用户
+    * @Date 11:54 2020/4/24
+    * @Param [admin]
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/queryRegister")
+    @ResponseBody
+    public List<Register> registerQuery(@RequestBody Admin admin) {
+        return registerService.findRegistersByKeyword(admin.getName());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询问题
+    * @Date 11:59 2020/4/24
+    * @Param [admin]
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/queryQuestion")
+    @ResponseBody
+    public List<Question> questionQuery(@RequestBody Admin admin) {
+        return questionService.findQuestionsByKeyword(admin.getName());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 模糊查询回答
+    * @Date 12:00 2020/4/24
+    * @Param [admin]
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/queryAnswer")
+    @ResponseBody
+    public List<Answer> answerQuery(@RequestBody Admin admin) {
+        return answerService.findAnswersByKeyword(admin.getName());
+    }
 
 }

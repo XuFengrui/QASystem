@@ -1,6 +1,7 @@
 package com.qa.system.service;
 
 import com.qa.system.entity.Answer;
+import com.qa.system.entity.Question;
 
 import java.util.List;
 
@@ -25,4 +26,5 @@ public interface AnswerService {
     public int whitelistAnswer(Answer answer);
     public int blacklistAnswers(List<Answer> answerList);
     public int whitelistAnswers(List<Answer> answerList);
+    public List<Answer> findAnswersByKeyword(String keyWord);
 }
