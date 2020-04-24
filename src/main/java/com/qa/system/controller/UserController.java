@@ -12,6 +12,7 @@ import com.qa.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 @RestController
@@ -185,6 +186,20 @@ public class UserController {
     @ResponseBody
     public String showIcon(@RequestBody User user) {
         return userService.showIcon(user);
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 通过base64编码转化为图片
+    * @Date 10:29 2020/4/24
+    * @Param [user] 电话号码
+    * @return java.awt.image.BufferedImage 图片image（BufferedImage类）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/showIcon")
+    @ResponseBody
+    public BufferedImage decodeToImage(@RequestBody User user) {
+        return userService.decodeToImage(user);
     }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {

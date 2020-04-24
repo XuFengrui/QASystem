@@ -297,6 +297,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description base编码转化为图片
+    * @Date 10:27 2020/4/24
+    * @Param [user]
+    * @return java.awt.image.BufferedImage
+    **/
     @Override
     public BufferedImage decodeToImage(User user) {
         if (!userDao.isUserExistByPhone(user.getPhone())) {
