@@ -201,6 +201,20 @@ public class UserController {
     public BufferedImage decodeToImage(@RequestBody User user) {
         return userService.decodeToImage(user);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 获取base64编码
+    * @Date 11:14 2020/4/24
+    * @Param [user]
+    * @return java.lang.String
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/getImageStr")
+    @ResponseBody
+    public String getImageStr(@RequestBody User user) {
+        return userService.getImageStr(user);
+    }
 //    @RequestMapping(value = "/user/hello")
 //    public String  userRegister() {
 //        return "hello!";

@@ -31,6 +31,7 @@ public interface UserService {
     public boolean saveIcon(User user);
     public String showIcon(User user);
     public BufferedImage decodeToImage(User user);
+    public String getImageStr(User user);
 
 
 }

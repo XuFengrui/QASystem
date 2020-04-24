@@ -312,4 +312,20 @@ public class UserServiceImpl implements UserService {
             return Base64Utils.decodeToImage(Base64Utils.getImageStr(userDao.findUserByPhone(user.getPhone()).getIcon()));
         }
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 获取base64编码
+    * @Date 11:08 2020/4/24
+    * @Param [user]
+    * @return java.lang.String
+    **/
+    @Override
+    public String getImageStr(User user) {
+        if (!userDao.isUserExistByPhone(user.getPhone())) {
+            return null;
+        } else {
+            return Base64Utils.getImageStr(userDao.findUserByPhone(user.getPhone()).getIcon());
+        }
+    }
 }
