@@ -15,6 +15,7 @@ import com.qa.system.utils.SendMailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
@@ -293,6 +294,15 @@ public class UserServiceImpl implements UserService {
             return null;
         } else {
             return userDao.findUserByPhone(user.getPhone()).getIcon();
+        }
+    }
+
+    @Override
+    public BufferedImage decodeToImage(User user) {
+        if (!userDao.isUserExistByPhone(user.getPhone())) {
+            return null;
+        } else {
+            return Base64Utils.decodeToImage(Base64Utils.getImageStr(userDao.findUserByPhone(user.getPhone()).getIcon()));
         }
     }
 }

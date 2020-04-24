@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Objects;
 
@@ -72,6 +74,28 @@ public class Base64Utils {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 将base64编码的图片转化为图片
+    * @Date 10:21 2020/4/24
+    * @Param [imageString]
+    * @return java.awt.image.BufferedImage
+    **/
+    public static BufferedImage decodeToImage(String imageString) {
+        BufferedImage image = null;
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 
 }

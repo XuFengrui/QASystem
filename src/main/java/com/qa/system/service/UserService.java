@@ -1,11 +1,10 @@
 package com.qa.system.service;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.qa.system.entity.Admin;
 import com.qa.system.entity.Register;
 import com.qa.system.entity.User;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
@@ -31,6 +30,7 @@ public interface UserService {
     public int whitelistUser(User user);
     public boolean saveIcon(User user);
     public String showIcon(User user);
+    public BufferedImage decodeToImage(User user);
 
 
 }
