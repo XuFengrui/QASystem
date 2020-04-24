@@ -12,4 +12,7 @@ spring:
     host: smtp.qq.com
     username: 2609231098@qq.com
     password: pkzkwytustijeace
-
+#application.yml格式
+uploadFile:
+  path: D://icon/   #(注意了后面一定加“\”)
+  staticAccessPath: /D://icon/**
