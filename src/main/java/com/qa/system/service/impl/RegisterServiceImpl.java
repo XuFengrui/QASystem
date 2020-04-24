@@ -144,6 +144,13 @@ public class RegisterServiceImpl implements RegisterService {
     **/
     @Override
     public List<Register> findRegistersByKeyword(String keyWord) {
-        return registerDao.findRegistersByKeyword(keyWord);
+        List<Register> registerList = new ArrayList<>();
+        List<Register> registers = registerDao.findRegistersByKeyword(keyWord);
+        for (int i = registers.size(); i > 0; i--) {
+            if (!userDao.isUserExistByPhone(registers.get(i - 1).getPhone())) {
+                registerList.add(registers.get(i - 1));
+            }
+        }
+        return registerList;
     }
 }
