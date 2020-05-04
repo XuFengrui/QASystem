@@ -218,7 +218,7 @@ public class AnswerDao {
     * @return java.util.List<com.qa.system.entity.Answer>
     **/
     public List<Answer> findAnswersByKeyword(String strWord) {
-        List<Answer> answerList = jdbcTemplate.query("select * from question where answerId like ? or details like ? or answerer like ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Answer.class));
+        List<Answer> answerList = jdbcTemplate.query("select * from answer where answerId like ? or details like ? or answerer like ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Answer.class));
         return answerList;
     }
 }
