@@ -2,11 +2,17 @@ package com.qa.system.controller;
 
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
+import com.qa.system.entity.Register;
+import com.qa.system.entity.VoAnswer;
 import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
+import com.qa.system.service.UserService;
+import com.qa.system.utils.Base64Utils;
+import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +30,9 @@ public class QuestionController {
 
     @Autowired
     AnswerService answerService;
+
+    @Autowired
+    UserService userService;
 
     /**
     * @Author XuFengrui
@@ -44,13 +53,28 @@ public class QuestionController {
     * @Description 根据问题编号查询该问题下未被屏蔽的所有回答
     * @Date 0:58 2020/4/3
     * @Param [question] 问题编号
-    * @return java.util.List<com.qa.system.entity.Answer> 回答类数组
+    * @return java.util.List<com.qa.system.entity.Answer> “特殊”回答类数组（在回答类的基础上多加了一个icon属性--用户头像）
     **/
     @CrossOrigin
     @PostMapping(value = "/question/answer")
     @ResponseBody
-    public List<Answer> questionToAnswer(@RequestBody Question question) {
-        return answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
+    public List<VoAnswer> questionToAnswer(@RequestBody Question question) {
+        List<Answer> answers = answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
+        List<VoAnswer> voAnswerList = new ArrayList<>();
+        VoAnswer voAnswer = null;
+        TimeSort.answerListSort(answers);
+        for (int i = answers.size(); i > 0; i--) {
+            voAnswer.setIcon(Base64Utils.getImageStr(userService.findUserByName(answers.get(i-1).getAnswerer()).getIcon()));
+            voAnswer.setAnswerId(answers.get(i-1).getAnswerId());
+            voAnswer.setaAnswerId(answers.get(i-1).getaAnswerId());
+            voAnswer.setAnswerer(answers.get(i-1).getAnswerer());
+            voAnswer.setaQuestionId(answers.get(i-1).getaQuestionId());
+            voAnswer.setDetails(answers.get(i-1).getDetails());
+            voAnswer.setShield(answers.get(i-1).getShield());
+            voAnswer.setTime(answers.get(i-1).getTime());
+            voAnswerList.add(voAnswer);
+        }
+        return voAnswerList;
     }
 
     /**
