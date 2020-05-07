@@ -60,7 +60,7 @@ public class QuestionController {
     public List<VoAnswer> questionToAnswer(@RequestBody Question question) {
         List<Answer> answers = answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
         List<VoAnswer> voAnswerList = new ArrayList<>();
-        VoAnswer voAnswer = null;
+        VoAnswer voAnswer = new VoAnswer();
         TimeSort.answerListSort(answers);
         for (int i = answers.size(); i > 0; i--) {
             voAnswer.setIcon(Base64Utils.getImageStr(userService.findUserByName(answers.get(i-1).getAnswerer()).getIcon()));
