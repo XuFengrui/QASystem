@@ -60,17 +60,17 @@ public class QuestionController {
     public List<VoAnswer> questionToAnswer(@RequestBody Question question) {
         List<Answer> answers = answerService.findWhiteAnswerByQuestionId(question.getQuestionId());
         List<VoAnswer> voAnswerList = new ArrayList<>();
-        VoAnswer voAnswer = new VoAnswer();
         TimeSort.answerListSort(answers);
-        for (int i = answers.size(); i > 0; i--) {
-            voAnswer.setIcon(Base64Utils.getImageStr(userService.findUserByName(answers.get(i-1).getAnswerer()).getIcon()));
-            voAnswer.setAnswerId(answers.get(i-1).getAnswerId());
-            voAnswer.setaAnswerId(answers.get(i-1).getaAnswerId());
-            voAnswer.setAnswerer(answers.get(i-1).getAnswerer());
-            voAnswer.setaQuestionId(answers.get(i-1).getaQuestionId());
-            voAnswer.setDetails(answers.get(i-1).getDetails());
-            voAnswer.setShield(answers.get(i-1).getShield());
-            voAnswer.setTime(answers.get(i-1).getTime());
+        for (int i = 0; i < answers.size(); i++) {
+            VoAnswer voAnswer = new VoAnswer();
+            voAnswer.setIcon(Base64Utils.getImageStr(userService.findUserByName(answers.get(i).getAnswerer()).getIcon()));
+            voAnswer.setAnswerId(answers.get(i).getAnswerId());
+            voAnswer.setaAnswerId(answers.get(i).getaAnswerId());
+            voAnswer.setAnswerer(answers.get(i).getAnswerer());
+            voAnswer.setaQuestionId(answers.get(i).getaQuestionId());
+            voAnswer.setDetails(answers.get(i).getDetails());
+            voAnswer.setShield(answers.get(i).getShield());
+            voAnswer.setTime(answers.get(i).getTime());
             voAnswerList.add(voAnswer);
         }
         return voAnswerList;
