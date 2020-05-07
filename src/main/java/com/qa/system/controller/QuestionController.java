@@ -2,7 +2,6 @@ package com.qa.system.controller;
 
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
-import com.qa.system.entity.Register;
 import com.qa.system.entity.VoAnswer;
 import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;

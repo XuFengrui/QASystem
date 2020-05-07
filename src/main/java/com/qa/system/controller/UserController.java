@@ -9,6 +9,7 @@ import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
 import com.qa.system.service.RegisterService;
 import com.qa.system.service.UserService;
+import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +70,9 @@ public class UserController {
     @PostMapping(value = "/user/question")
     @ResponseBody
     public List<Question> userAllQuestion(@RequestBody User user) {
-        return questionService.findQuestionByUserName(user.getName());
+        List<Question> questionList = questionService.findQuestionByUserName(user.getName());
+        TimeSort.questionListSort(questionList);
+        return questionList;
     }
 
     /**
@@ -83,7 +86,9 @@ public class UserController {
     @PostMapping(value = "/user/answer")
     @ResponseBody
     public List<Answer> userAllAnswer(@RequestBody User user) {
-        return answerService.findAnswerByUserName(user.getName());
+        List<Answer> answerList = answerService.findAnswerByUserName(user.getName());
+        TimeSort.answerListSort(answerList);
+        return answerList;
     }
 
     /**
