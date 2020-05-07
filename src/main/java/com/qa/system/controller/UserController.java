@@ -228,7 +228,7 @@ public class UserController {
     @CrossOrigin
     @PostMapping(value = "/user/message")
     @ResponseBody
-    public List<Message> findMessageByName(String name) {
-        return userService.findMessageByName(name);
+    public List<Message> findMessageByName(@RequestBody User user) {
+        return userService.findMessageByName(user.getName());
     }
 }
