@@ -1,9 +1,8 @@
 package com.qa.system.service.impl;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.qa.system.dao.*;
-import com.qa.system.entity.Admin;
+import com.qa.system.entity.Message;
 import com.qa.system.entity.Register;
 import com.qa.system.entity.User;
 import com.qa.system.service.AnswerService;
@@ -39,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     AnswerDao answerDao;
+
+    @Autowired
+    MessageDao messageDao;
 
     @Autowired
     QuestionService questionService;
@@ -222,6 +224,7 @@ public class UserServiceImpl implements UserService {
                 userDao.userShield(user);
                 questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
                 answerService.blacklistAnswers(answerDao.findAnswersByUserName(user.getName()));
+                messageDao.userBlackMessage(userDao.findUserByPhone(user.getPhone()).getName());
                 return 1;
             } else {
                 return 0;
@@ -247,6 +250,7 @@ public class UserServiceImpl implements UserService {
                 userDao.userShield(user);
                 questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));
                 answerService.whitelistAnswers(answerDao.findAnswersByUserName(user.getName()));
+                messageDao.userWhiteMessage(userDao.findUserByPhone(user.getPhone()).getName());
                 return 1;
             } else {
                 return 0;
@@ -339,5 +343,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUsersByKeyword(String keyWord) {
         return userDao.findUsersByKeyword(keyWord);
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据用户名查询该用户所接收的所有消息
+    * @Date 15:20 2020/5/7
+    * @Param [name]
+    * @return java.util.List<com.qa.system.entity.Message>
+    **/
+    @Override
+    public List<Message> findMessageByName(String name) {
+        return messageDao.findMessageByName(name);
     }
 }

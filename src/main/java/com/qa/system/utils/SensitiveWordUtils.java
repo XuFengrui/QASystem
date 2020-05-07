@@ -1,5 +1,10 @@
 package com.qa.system.utils;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.*;
 
@@ -292,5 +297,22 @@ public class SensitiveWordUtils {
         return string;
     }
 
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, ServletException {
+        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        //获取前端传递的所有参数名的枚举
+        Enumeration pNames = request.getParameterNames();
+        //遍历枚举
+        while(pNames.hasMoreElements()){
+            //获取参数名
+            String name=(String)pNames.nextElement();
+            //获取参数值
+            String value =request.getParameter(name);
+            //对参数值进行敏感词处理,并重新设置到request
+            String str = SensitiveWordUtils.sensitiveHelper(value);
+            request.setAttribute(name,str);
+        }
+        //放行
+        filterChain.doFilter(servletRequest,servletResponse);
+    }
 }
 

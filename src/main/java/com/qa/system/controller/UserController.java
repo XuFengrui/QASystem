@@ -1,10 +1,7 @@
 package com.qa.system.controller;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.qa.system.entity.Answer;
-import com.qa.system.entity.Question;
-import com.qa.system.entity.Register;
-import com.qa.system.entity.User;
+import com.qa.system.entity.*;
 import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
 import com.qa.system.service.RegisterService;
@@ -220,8 +217,18 @@ public class UserController {
     public String getImageStr(@RequestBody User user) {
         return userService.getImageStr(user);
     }
-//    @RequestMapping(value = "/user/hello")
-//    public String  userRegister() {
-//        return "hello!";
-//    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 通过用户名查询该用户的所有消息
+    * @Date 15:25 2020/5/7
+    * @Param [name] 用户名
+    * @return java.util.List<com.qa.system.entity.Message>
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/message")
+    @ResponseBody
+    public List<Message> findMessageByName(String name) {
+        return userService.findMessageByName(name);
+    }
 }

@@ -1,9 +1,11 @@
 package com.qa.system.service.impl;
 
 import com.qa.system.dao.AnswerDao;
+import com.qa.system.dao.MessageDao;
 import com.qa.system.dao.QuestionDao;
 import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Answer;
+import com.qa.system.entity.Message;
 import com.qa.system.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    MessageDao messageDao;
 
 
     /**
@@ -137,6 +142,12 @@ public class AnswerServiceImpl implements AnswerService {
                         } else {
                             answer.setShield(0);
                         }
+                        Message message = new Message();
+                        message.setRecipient(questionDao.findQuestionById(answer.getaQuestionId()).getQuestioner());
+                        message.setSender(answer.getAnswerer());
+                        message.setQuestionId(answer.getaQuestionId());
+                        message.setAnswerId(answer.getAnswerId());
+                        messageDao.byAnswerMessage(message);
                         return answerDao.addAnswer(answer);
 
                     } else if (answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
@@ -145,6 +156,12 @@ public class AnswerServiceImpl implements AnswerService {
                         } else {
                             answer.setShield(0);
                         }
+                        Message message = new Message();
+                        message.setRecipient(answerDao.findAnswerById(answer.getaAnswerId()).getAnswerer());
+                        message.setSender(answer.getAnswerer());
+                        message.setAnswerId(answer.getaAnswerId());
+                        message.setCommentId(answer.getAnswerId());
+                        messageDao.byAnswerMessage(message);
                         return answerDao.addAnswer(answer);
                     } else {
                         return -2;
@@ -206,6 +223,10 @@ public class AnswerServiceImpl implements AnswerService {
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
                 answer.setShield(0);
                 answerDao.answerShield(answer);
+                Message message = new Message();
+                message.setRecipient(answerDao.findAnswerById(answer.getAnswerId()).getAnswerer());
+                message.setAnswerId(answer.getAnswerId());
+                messageDao.answerBlackMessage(message);
                 return 1;
             } else {
                 return 0;
@@ -229,6 +250,10 @@ public class AnswerServiceImpl implements AnswerService {
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 0) {
                 answer.setShield(1);
                 answerDao.answerShield(answer);
+                Message message = new Message();
+                message.setRecipient(answerDao.findAnswerById(answer.getAnswerId()).getAnswerer());
+                message.setAnswerId(answer.getAnswerId());
+                messageDao.answerWhiteMessage(message);
                 return 1;
             } else {
                 return 0;
@@ -241,10 +266,10 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 返回值为成功屏蔽的回答数量
+    * @Description 屏蔽一组回答
     * @Date 10:45 2020/3/30
     * @Param [answerList]
-    * @return int
+    * @return int 返回值为成功屏蔽的回答数量
     **/
     @Override
     public int blacklistAnswers(List<Answer> answerList) {
@@ -259,10 +284,10 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
-    * @Description 返回值为成功解除屏蔽的回答数量
+    * @Description 解除屏蔽一组回答
     * @Date 10:45 2020/3/30
     * @Param [answerList]
-    * @return int
+    * @return int 返回值为成功解除屏蔽的回答数量
     **/
     @Override
     public int whitelistAnswers(List<Answer> answerList) {

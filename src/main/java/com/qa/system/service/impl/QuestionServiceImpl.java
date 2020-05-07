@@ -1,9 +1,7 @@
 package com.qa.system.service.impl;
 
-import com.qa.system.dao.AnswerDao;
-import com.qa.system.dao.HeatDao;
-import com.qa.system.dao.QuestionDao;
-import com.qa.system.dao.UserDao;
+import com.qa.system.dao.*;
+import com.qa.system.entity.Message;
 import com.qa.system.entity.Question;
 import com.qa.system.service.QuestionService;
 import com.qa.system.utils.TimeSort;
@@ -33,6 +31,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     HeatDao heatDao;
+
+    @Autowired
+    MessageDao messageDao;
 
     /**
     * @Author XuFengrui
@@ -172,6 +173,10 @@ public class QuestionServiceImpl implements QuestionService {
             if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 1) {
                 question.setShield(0);
                 questionDao.questionShield(question);
+                Message message = new Message();
+                message.setRecipient(questionDao.findQuestionById(question.getQuestionId()).getQuestioner());
+                message.setQuestionId(question.getQuestionId());
+                messageDao.questionBlackMessage(message);
                 return 1;
             } else {
                 return 0;
@@ -194,6 +199,10 @@ public class QuestionServiceImpl implements QuestionService {
             if (questionDao.findQuestionById(question.getQuestionId()).getShield() == 0) {
                 question.setShield(1);
                 questionDao.questionShield(question);
+                Message message = new Message();
+                message.setRecipient(questionDao.findQuestionById(question.getQuestionId()).getQuestioner());
+                message.setQuestionId(question.getQuestionId());
+                messageDao.questionWhiteMessage(message);
                 return 1;
             } else {
                 return 0;

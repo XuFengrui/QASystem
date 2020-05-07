@@ -1,8 +1,6 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Question;
-import com.qa.system.entity.Register;
-import com.qa.system.entity.User;
 import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

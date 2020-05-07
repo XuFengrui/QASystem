@@ -4,7 +4,6 @@ import com.qa.system.dao.AdminDao;
 import com.qa.system.entity.Admin;
 import com.qa.system.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Indexed;
 import org.springframework.stereotype.Service;
 
 /**
