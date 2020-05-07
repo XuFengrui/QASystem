@@ -115,7 +115,7 @@ public class MessageDao {
     * @return int
     **/
     public int userBlackMessage(String name) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,time) values(?,?,?,?)",maxId()+1,name,"您已被管理员拉黑",FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,name,"您已被管理员拉黑",0,0,0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -127,7 +127,7 @@ public class MessageDao {
     * @return int
     **/
     public int userWhiteMessage(String name) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,time) values(?,?,?,?)",maxId()+1,name,"您已被解除拉黑",FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,name,"您已被解除拉黑",0,0,0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -139,7 +139,7 @@ public class MessageDao {
     * @return int
     **/
     public int questionBlackMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,time) values(?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被管理员屏蔽",message.getQuestionId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被管理员屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -151,7 +151,7 @@ public class MessageDao {
     * @return int
     **/
     public int questionWhiteMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,time) values(?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被解除屏蔽",message.getQuestionId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被解除屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -163,7 +163,7 @@ public class MessageDao {
     * @return int
     **/
     public int answerBlackMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,answerId,time) values(?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被管理员屏蔽",message.getAnswerId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被管理员屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -175,7 +175,7 @@ public class MessageDao {
     * @return int
     **/
     public int answerWhiteMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,answerId,time) values(?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被解除屏蔽",message.getAnswerId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被解除屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -187,7 +187,7 @@ public class MessageDao {
     * @return int
     **/
     public int byAnswerMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的回复",message.getQuestionId(),message.getAnswerId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的回复",message.getQuestionId(),message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -199,7 +199,7 @@ public class MessageDao {
     * @return int
     **/
     public int byCommentMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的评论",message.getAnswerId(),message.getCommentId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的评论",0,message.getAnswerId(),message.getCommentId(),FormatChange.dateTimeChange(new Date()));
         return count;
     }
 }

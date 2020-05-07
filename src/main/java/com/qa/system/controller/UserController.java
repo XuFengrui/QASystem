@@ -226,9 +226,9 @@ public class UserController {
     * @return java.util.List<com.qa.system.entity.Message>
     **/
     @CrossOrigin
-    @PostMapping(value = "/user/message")
+    @RequestMapping(value = "/user/message")
     @ResponseBody
-    public List<Message> findMessageByName(@RequestBody User user) {
-        return userService.findMessageByName(user.getName());
+    public List<Message> findMessageByName() {
+        return userService.findMessageByName("xxx");
     }
 }
