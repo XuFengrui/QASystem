@@ -1,4 +1,6 @@
 package com.qa.system.utils;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +12,7 @@ import java.util.Set;
  * @Date 2020/5/7
  * @Version 1.0
  **/
+@Component
 public class ReadTxt {
 
     public static Object readFile(String pathName)

@@ -11,6 +11,7 @@ import com.qa.system.service.UserService;
 import com.qa.system.utils.AliyunSmsUtils;
 import com.qa.system.utils.Base64Utils;
 import com.qa.system.utils.SendMailUtils;
+import com.qa.system.utils.Sha256Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -163,7 +164,7 @@ public class UserServiceImpl implements UserService {
     public int loginUserByPassword(User user) {
         if(!userDao.isUserExistByName(user.getName())){
             return -1;
-        }else if(userDao.findUserByName(user.getName()).getPassword().equals(user.getPassword())){
+        }else if(Sha256Utils.getSHA256Str(userDao.findUserByName(user.getName()).getPassword()).equals(user.getPassword())){
             return 1;
         }else{
             return 0;
@@ -199,7 +200,7 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setPhone(register.getPhone());
             user.setName(register.getName());
-            user.setPassword(register.getPassword());
+            user.setPassword(Sha256Utils.getSHA256Str(register.getPassword()));
             user.setSex(register.getSex());
             user.setAge(register.getAge());
             sendMailUtils.sendSuccessRegisterMail(register.getMail(),register.getName());
