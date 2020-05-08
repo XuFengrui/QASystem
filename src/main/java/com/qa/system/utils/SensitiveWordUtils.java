@@ -284,7 +284,7 @@ public class SensitiveWordUtils {
     @SuppressWarnings("unchecked")
     public static String sensitiveHelper(String string) throws Exception {
         Set<String> sensitiveWordSet = null;
-        sensitiveWordSet = ReadTxt.readFile("D:\\敏感词库（UTF-8）\\敏感词库.txt");
+        sensitiveWordSet = ReadTxt.readFile("E:\\敏感词库（UTF-8）\\敏感词库.txt");
         //初始化敏感词库
         SensitiveWordUtils.init(sensitiveWordSet);
         //判断是否包含敏感词
