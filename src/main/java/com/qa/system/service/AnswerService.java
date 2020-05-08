@@ -19,8 +19,8 @@ public interface AnswerService {
     public List<Answer> findAnswersByQuestionId(int id);
     public List<Answer> findAnswerByUserName(String name);
     public List<Answer> findWhiteAnswerByQuestionId(int id);
-    public int updateAnswer(Answer answer);
-    public int addAnswer(Answer answer);
+    public int updateAnswer(Answer answer) throws Exception;
+    public int addAnswer(Answer answer) throws Exception;
     public int deleteAnswerById(int id);
     public int blacklistAnswer(Answer answer);
     public int whitelistAnswer(Answer answer);

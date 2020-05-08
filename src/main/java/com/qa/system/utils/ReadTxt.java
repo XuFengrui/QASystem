@@ -1,8 +1,12 @@
 package com.qa.system.utils;
+import com.sun.media.jfxmedia.track.Track;
+import org.springframework.boot.autoconfigure.http.HttpProperties;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -15,26 +19,36 @@ import java.util.Set;
 @Component
 public class ReadTxt {
 
-    public static Object readFile(String pathName)
-    {
-        Object temp=null;
-        File file =new File(pathName);
-        FileInputStream fileInputStream;
+    public static Set<String > readFile(String filePath) throws Exception{
+        //存放文件内容的set集合
+        Set<String> set = null;
+        //读取文件
+        File file = new File(filePath);
+        //建立读取流
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(filePath),"GBK");
         try {
-            fileInputStream = new FileInputStream(file);
-            ObjectInputStream objIn=new ObjectInputStream(fileInputStream);
-            temp=objIn.readObject();//从文件当中读取对象
-            Set<Object> objects = new HashSet<Object>();
-            objects.add(temp);//添加对象到set集合里面
-            objIn.close();
-            System.out.println("read object success!");
-        } catch (IOException e) {
-            System.out.println("read object failed");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            //判断文件是否存在
+            if (file.isFile() && file.exists()) {
+                //初始化set集合
+                set = new HashSet<String>();
+                //缓冲区读取流
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                //循环读取文件中内容，每次读取一行内容
+                String txt = null;
+                while ((txt = bufferedReader.readLine()) != null) {
+                    //读取文件，将文件内容放入到set中
+                    set.add(txt);
+                }
+            } else {
+                //不存在，抛出异常信息
+                throw new Exception("敏感词库文件不存在");
+            }
+        } catch (Exception e) {
+            throw e;
+        }finally {
+            inputStreamReader.close();
         }
-        return temp;
+        return set;
     }
 }
 

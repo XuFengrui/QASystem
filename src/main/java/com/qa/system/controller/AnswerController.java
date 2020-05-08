@@ -31,7 +31,7 @@ public class AnswerController {
     @CrossOrigin
     @PostMapping(value = "/answer/add")
     @ResponseBody
-    public int answerAdd(@RequestBody Answer answer) {
+    public int answerAdd(@RequestBody Answer answer) throws Exception {
         return answerService.addAnswer(answer);
     }
 
@@ -45,7 +45,7 @@ public class AnswerController {
     @CrossOrigin
     @PostMapping(value = "/answer/update")
     @ResponseBody
-    public int answerUpdate(@RequestBody Answer answer) {
+    public int answerUpdate(@RequestBody Answer answer) throws Exception {
         return answerService.updateAnswer(answer);
     }
 

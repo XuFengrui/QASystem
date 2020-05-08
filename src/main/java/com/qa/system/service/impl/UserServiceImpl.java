@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
     public int loginUserByPassword(User user) {
         if(!userDao.isUserExistByName(user.getName())){
             return -1;
-        }else if(Sha256Utils.getSHA256Str(userDao.findUserByName(user.getName()).getPassword()).equals(user.getPassword())){
+        }else if(userDao.findUserByName(user.getName()).getPassword().equals(Sha256Utils.getSHA256Str(user.getPassword()))){
             return 1;
         }else{
             return 0;

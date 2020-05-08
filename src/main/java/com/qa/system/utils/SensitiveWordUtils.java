@@ -282,12 +282,12 @@ public class SensitiveWordUtils {
     * @return java.lang.String
     **/
     @SuppressWarnings("unchecked")
-    public static String sensitiveHelper(String string) throws IOException {
+    public static String sensitiveHelper(String string) throws Exception {
         Set<String> sensitiveWordSet = null;
-        sensitiveWordSet = (Set<String>)ReadTxt.readFile("D:\\product\\敏感词库（UTF-8）\\暴恐词库.txt");
+        sensitiveWordSet = ReadTxt.readFile("E:\\敏感词库（UTF-8）\\敏感词库.txt");
         //初始化敏感词库
         SensitiveWordUtils.init(sensitiveWordSet);
-        //判断是否包含敏感词库
+        //判断是否包含敏感词
         if (contains(string)){
             //若包含返回替换后的字符
             String str = SensitiveWordUtils.replaceSensitiveWord(string, "**");
@@ -297,7 +297,7 @@ public class SensitiveWordUtils {
         return string;
     }
 
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws Exception {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         //获取前端传递的所有参数名的枚举
         Enumeration pNames = request.getParameterNames();

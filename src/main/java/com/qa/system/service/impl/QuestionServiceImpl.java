@@ -4,10 +4,12 @@ import com.qa.system.dao.*;
 import com.qa.system.entity.Message;
 import com.qa.system.entity.Question;
 import com.qa.system.service.QuestionService;
+import com.qa.system.utils.SensitiveWordUtils;
 import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -125,7 +127,7 @@ public class QuestionServiceImpl implements QuestionService {
     * @return int
     **/
     @Override
-    public int addQuestion(Question question) {
+    public int addQuestion(Question question) throws Exception {
         if(!questionDao.isQuestionExist(question.getQuestionId())){
             if (userDao.findUserByName(question.getQuestioner()).getShield() == 0) {
                 question.setShield(0);
@@ -134,6 +136,7 @@ public class QuestionServiceImpl implements QuestionService {
             }
             question.setHeat(0);
             question.setEnd(1);
+            question.setDetails(SensitiveWordUtils.sensitiveHelper(question.getDetails()));
             return questionDao.addQuestion(question);
         }else {
             return -1;

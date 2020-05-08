@@ -2,6 +2,7 @@ package com.qa.system.service;
 
 import com.qa.system.entity.Question;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface QuestionService {
     public List<Question> findQuestionByUserName(String name);
     public Question findQuestionById(int id);
     public int updateQuestion(Question question);
-    public int addQuestion(Question question);
+    public int addQuestion(Question question) throws Exception;
     public int deleteQuestionById(int id);
     public int blacklistQuestion(Question question);
     public int whitelistQuestion(Question question);

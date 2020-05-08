@@ -7,6 +7,7 @@ import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Message;
 import com.qa.system.service.AnswerService;
+import com.qa.system.utils.SensitiveWordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,16 +96,18 @@ public class AnswerServiceImpl implements AnswerService {
     * @return int
     **/
     @Override
-    public int updateAnswer(Answer answer) {
+    public int updateAnswer(Answer answer) throws Exception {
         if (answerDao.isAnswerExist(answer.getAnswerId())) {
             if (answerDao.findAnswerById(answer.getAnswerId()).getShield() == 1) {
                 if (questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()).getShield() == 1) {
                     if (questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()).getEnd() == 1) {
                         if (!answerDao.isAAnswerExist(answer.getAnswerId())) {
                             questionDao.updateQuestion(questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()));
+                            answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                             return answerDao.updateAnswer(answer);
                         } else if ( answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId() == 0 || answerDao.findAnswerById(answerDao.findAnswerById(answer.getAnswerId()).getaAnswerId()).getShield() == 1) {
                             questionDao.updateQuestion(questionDao.findQuestionById(answerDao.findAnswerById(answer.getAnswerId()).getaQuestionId()));
+                            answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                             return answerDao.updateAnswer(answer);
                         } else {
                             return -4;
@@ -131,7 +134,7 @@ public class AnswerServiceImpl implements AnswerService {
     * @return int
     **/
     @Override
-    public int addAnswer(Answer answer) {
+    public int addAnswer(Answer answer) throws Exception {
         if(!answerDao.isAnswerExist(answer.getAnswerId())){
             if (questionDao.findQuestionById(answer.getaQuestionId()).getShield() == 1) {
                 if (questionDao.findQuestionById(answer.getaQuestionId()).getEnd() == 1) {
@@ -148,6 +151,7 @@ public class AnswerServiceImpl implements AnswerService {
                         message.setQuestionId(answer.getaQuestionId());
                         message.setAnswerId(answer.getAnswerId());
                         messageDao.byAnswerMessage(message);
+                        answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                         return answerDao.addAnswer(answer);
 
                     } else if (answerDao.findAnswerById(answer.getaAnswerId()).getShield() == 1) {
@@ -162,6 +166,7 @@ public class AnswerServiceImpl implements AnswerService {
                         message.setAnswerId(answer.getaAnswerId());
                         message.setCommentId(answer.getAnswerId());
                         messageDao.byAnswerMessage(message);
+                        answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                         return answerDao.addAnswer(answer);
                     } else {
                         return -2;

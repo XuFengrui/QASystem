@@ -11,6 +11,7 @@ import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class QuestionController {
     @CrossOrigin
     @PostMapping(value = "/question/add")
     @ResponseBody
-    public int questionAdd(@RequestBody Question question) {
+    public int questionAdd(@RequestBody Question question) throws Exception {
         return questionService.addQuestion(question);
     }
 
