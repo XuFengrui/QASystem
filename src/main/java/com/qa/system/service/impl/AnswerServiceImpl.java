@@ -6,7 +6,9 @@ import com.qa.system.dao.QuestionDao;
 import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Message;
+import com.qa.system.entity.VoAnswer;
 import com.qa.system.service.AnswerService;
+import com.qa.system.utils.Base64Utils;
 import com.qa.system.utils.SensitiveWordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,6 +90,18 @@ public class AnswerServiceImpl implements AnswerService {
         }
     }
 
+    @Override
+    public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id) {
+        List<VoAnswer> voAnswerList= answerDao.findWhiteVoAnswersByQuestionId(id);
+        System.out.println(voAnswerList.size());
+        for (int i = 0; i < voAnswerList.size(); i++) {
+            VoAnswer voAnswer = voAnswerList.get(i);
+            voAnswer.setIcon(Base64Utils.getImageStr(userDao.findUserByName(voAnswer.getAnswerer()).getIcon()));
+            voAnswerList.set(i,voAnswer);
+        }
+        return voAnswerList;
+    }
+
     /**
     * @Author XuFengrui
     * @Description 更改回答,若回答编号不存在则返回-1；若回答已被屏蔽返回0；若回答的问题已被屏蔽返回-2，若回答的问题已被终结返回-3，若回答的回答已被屏蔽返回-4，若更改成功则返回1
@@ -165,7 +179,7 @@ public class AnswerServiceImpl implements AnswerService {
                         message.setSender(answer.getAnswerer());
                         message.setAnswerId(answer.getaAnswerId());
                         message.setCommentId(answer.getAnswerId());
-                        messageDao.byAnswerMessage(message);
+                        messageDao.byCommentMessage(message);
                         answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                         return answerDao.addAnswer(answer);
                     } else {

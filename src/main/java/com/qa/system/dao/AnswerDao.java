@@ -2,6 +2,7 @@ package com.qa.system.dao;
 
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
+import com.qa.system.entity.VoAnswer;
 import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -196,6 +197,18 @@ public class AnswerDao {
     public List<Answer> findWhiteAnswersByQuestionId(int id) {
         List<Answer> answerList = jdbcTemplate.query("select * from answer where aQuestionId = ? and shield = ? ",new BeanPropertyRowMapper<>(Answer.class),id,1);
         return answerList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据问题查询所有未被屏蔽的voAnswer类回答
+    * @Date 12:45 2020/5/8
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.VoAnswer>
+    **/
+    public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id) {
+        List<VoAnswer> voanswerList = jdbcTemplate.query("select * from answer where aQuestionId = ? and shield = ? order by time desc ",new BeanPropertyRowMapper<>(VoAnswer.class),id,1);
+        return voanswerList;
     }
 
     /**

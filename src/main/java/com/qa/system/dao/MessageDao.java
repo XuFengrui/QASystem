@@ -47,7 +47,7 @@ public class MessageDao {
     * @return com.qa.system.entity.Message
     **/
     public List<Message> findMessageByName(String name) {
-        List<Message> messageList = jdbcTemplate.query("select * from message where recipient = ?", new BeanPropertyRowMapper<>(Message.class), name);
+        List<Message> messageList = jdbcTemplate.query("select * from message where recipient = ? order by time desc", new BeanPropertyRowMapper<>(Message.class), name);
         if (messageList.size() > 0) {
             return messageList;
         } else {

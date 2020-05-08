@@ -2,6 +2,7 @@ package com.qa.system.service;
 
 import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
+import com.qa.system.entity.VoAnswer;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public interface AnswerService {
     public List<Answer> findAnswersByQuestionId(int id);
     public List<Answer> findAnswerByUserName(String name);
     public List<Answer> findWhiteAnswerByQuestionId(int id);
+    public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id);
     public int updateAnswer(Answer answer) throws Exception;
     public int addAnswer(Answer answer) throws Exception;
     public int deleteAnswerById(int id);
