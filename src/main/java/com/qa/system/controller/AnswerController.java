@@ -67,14 +67,13 @@ public class AnswerController {
     * @Author XuFengrui
     * @Description 根据回答查询回答编号
     * @Date 9:58 2020/5/12
-    * @Param [answer]
-    * @return java.util.List<VoComment>
+    * @Param [answer] 回答编号
+    * @return java.util.List<VoComment> 返回该回答下的所有未被屏蔽的评论
     **/
     @CrossOrigin
-    @RequestMapping(value = "/answer/comment")
+    @PostMapping(value = "/answer/comment")
     @ResponseBody
-    public List<VoComment> answerToComment() {
-//        return answerService.findWhiteVoCommentsByAnswerId(answer.getAnswerId());
-        return answerService.findWhiteVoCommentsByAnswerId(4);
+    public List<VoComment> answerToComment(@RequestBody Answer answer) {
+        return answerService.findWhiteVoCommentsByAnswerId(answer.getAnswerId());
     }
 }
