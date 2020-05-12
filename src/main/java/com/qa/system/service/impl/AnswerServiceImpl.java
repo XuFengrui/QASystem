@@ -4,15 +4,14 @@ import com.qa.system.dao.AnswerDao;
 import com.qa.system.dao.MessageDao;
 import com.qa.system.dao.QuestionDao;
 import com.qa.system.dao.UserDao;
-import com.qa.system.entity.Answer;
-import com.qa.system.entity.Message;
-import com.qa.system.entity.VoAnswer;
+import com.qa.system.entity.*;
 import com.qa.system.service.AnswerService;
 import com.qa.system.utils.Base64Utils;
 import com.qa.system.utils.SensitiveWordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,6 +89,13 @@ public class AnswerServiceImpl implements AnswerService {
         }
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 根据问题查询面向对象的回答数组voAnswer
+    * @Date 9:35 2020/5/12
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.VoAnswer>
+    **/
     @Override
     public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id) {
         List<VoAnswer> voAnswerList= answerDao.findWhiteVoAnswersByQuestionId(id);
@@ -100,6 +106,31 @@ public class AnswerServiceImpl implements AnswerService {
             voAnswerList.set(i,voAnswer);
         }
         return voAnswerList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据回答查询面向对象的评论数组voComment
+    * @Date 9:35 2020/5/12
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.VoComment>
+    **/
+    @Override
+    public List<VoComment> findWhiteVoCommentsByAnswerId(int id) {
+        List<VoComment> commentList = new ArrayList<>();
+        if (answerDao.findWhiteVoCommentsByAnswerId(id).size() > 0) {
+            List<VoComment> comments = answerDao.findWhiteVoCommentsByAnswerId(id);
+            for (int i = 0; i < comments.size(); i++) {
+                commentList.addAll(findWhiteVoCommentsByAnswerId(comments.get(i).getAnswerId()));
+            }
+        } else if (answerDao.findAnswerById(id).getaAnswerId() != 0) {
+            VoComment voComment = answerDao.findWhiteVoCommentByCommentId(id);
+            User user = userDao.findUserByName(answerDao.findAnswerById(voComment.getaAnswerId()).getAnswerer());
+            voComment.setIcon(user.getIcon());
+            voComment.setByAnswerer(user.getName());
+            commentList.add(voComment);
+        }
+        return commentList;
     }
 
     /**

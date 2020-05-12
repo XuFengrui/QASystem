@@ -1,7 +1,7 @@
 package com.qa.system.controller;
 
 import com.qa.system.entity.Answer;
-import com.qa.system.entity.Question;
+import com.qa.system.entity.VoComment;
 import com.qa.system.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +61,20 @@ public class AnswerController {
     @ResponseBody
     public int answerDelete(@RequestBody Answer answer) {
         return answerService.deleteAnswerById(answer.getAnswerId());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据回答查询回答编号
+    * @Date 9:58 2020/5/12
+    * @Param [answer]
+    * @return java.util.List<VoComment>
+    **/
+    @CrossOrigin
+    @RequestMapping(value = "/answer/comment")
+    @ResponseBody
+    public List<VoComment> answerToComment() {
+//        return answerService.findWhiteVoCommentsByAnswerId(answer.getAnswerId());
+        return answerService.findWhiteVoCommentsByAnswerId(4);
     }
 }

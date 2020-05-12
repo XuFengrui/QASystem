@@ -1,8 +1,8 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Answer;
-import com.qa.system.entity.Question;
 import com.qa.system.entity.VoAnswer;
+import com.qa.system.entity.VoComment;
 import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -101,7 +101,7 @@ public class AnswerDao {
     * @return int
     **/
     public int addAnswer(Answer answer) {
-        int count = jdbcTemplate.update("insert into answer(answerId,details,answerer,aQuestionId,aAnswerId,shield,time) values(?,?,?,?,?,?,?)",maxAnswerId()+1,answer.getDetails(),answer.getAnswerer(),answer.getaQuestionId(),answer.getaAnswerId(),answer.getShield(), FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into answer(answerId,details,answerer,aQuestionId,aAnswerId,shield,time,startTime) values(?,?,?,?,?,?,?,?)",maxAnswerId()+1,answer.getDetails(),answer.getAnswerer(),answer.getaQuestionId(),answer.getaAnswerId(),answer.getShield(), FormatChange.dateTimeChange(new Date()),FormatChange.dateTimeChange(new Date()));
         return count;
     }
 
@@ -207,8 +207,36 @@ public class AnswerDao {
     * @return java.util.List<com.qa.system.entity.VoAnswer>
     **/
     public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id) {
-        List<VoAnswer> voanswerList = jdbcTemplate.query("select * from answer where aQuestionId = ? and shield = ? order by time desc ",new BeanPropertyRowMapper<>(VoAnswer.class),id,1);
+        List<VoAnswer> voanswerList = jdbcTemplate.query("select * from answer where aQuestionId = ? and aAnswerId = ? and shield = ? order by time desc ",new BeanPropertyRowMapper<>(VoAnswer.class),id,0,1);
         return voanswerList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据回答编号查询其所有未被屏蔽的评论
+    * @Date 9:27 2020/5/12
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.VoComment>
+    **/
+    public List<VoComment> findWhiteVoCommentsByAnswerId(int id) {
+        List<VoComment> voCommentList = jdbcTemplate.query("select * from answer where aAnswerId = ? and shield = ? order by startTime asc ",new BeanPropertyRowMapper<>(VoComment.class),id,1);
+        return voCommentList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description
+    * @Date 9:47 2020/5/12
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.VoComment>
+    **/
+    public VoComment findWhiteVoCommentByCommentId(int id) {
+        List<VoComment> voCommentList = jdbcTemplate.query("select * from answer where AnswerId = ? and shield = ? ",new BeanPropertyRowMapper<>(VoComment.class),id,1);
+        if(voCommentList.size()>0){
+            return voCommentList.get(0);
+        }else{
+            return null;
+        }
     }
 
     /**

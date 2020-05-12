@@ -1,22 +1,22 @@
 package com.qa.system.entity;
 
 /**
- * @ClassName Answer
- * @Description DOTO
+ * @ClassName VoComment
+ * @Description TODO
  * @Author XuFengrui
- * @date 2020/3/29
+ * @Date 2020/5/12
  * @Version 1.0
  **/
-public class Answer {
+public class VoComment {
 
     private int answerId;
     private String details;
+    private String byAnswerer;
     private String answerer;
-    private int aQuestionId;
     private int aAnswerId;
     private int shield;
-    private String time;
     private String startTime;
+    private String icon;
 
     public int getAnswerId() {
         return answerId;
@@ -34,20 +34,20 @@ public class Answer {
         this.details = details;
     }
 
+    public String getByAnswerer() {
+        return byAnswerer;
+    }
+
+    public void setByAnswerer(String byAnswerer) {
+        this.byAnswerer = byAnswerer;
+    }
+
     public String getAnswerer() {
         return answerer;
     }
 
     public void setAnswerer(String answerer) {
         this.answerer = answerer;
-    }
-
-    public int getaQuestionId() {
-        return aQuestionId;
-    }
-
-    public void setaQuestionId(int aQuestionId) {
-        this.aQuestionId = aQuestionId;
     }
 
     public int getaAnswerId() {
@@ -66,19 +66,19 @@ public class Answer {
         this.shield = shield;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public String getStartTime() {
         return startTime;
     }
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }
