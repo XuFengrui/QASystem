@@ -41,6 +41,22 @@ public class MessageDao {
 
     /**
     * @Author XuFengrui
+    * @Description 根据编号查询消息
+    * @Date 21:56 2020/5/14
+    * @Param [id]
+    * @return java.util.List<com.qa.system.entity.Message>
+    **/
+    public Message findMessageById(int id) {
+        List<Message> messageList = jdbcTemplate.query("select * from message where id = ? order by time desc", new BeanPropertyRowMapper<>(Message.class), id);
+        if (messageList.size() > 0) {
+            return messageList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 根据用户名查询该用户被操作过的所有信息
     * @Date 15:06 2020/5/7
     * @Param [name]

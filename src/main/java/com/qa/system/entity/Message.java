@@ -17,6 +17,7 @@ public class Message {
     private int answerId;
     private int commentId;
     private String time;
+    private int status;
 
     public int getId() {
         return id;
@@ -80,5 +81,13 @@ public class Message {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

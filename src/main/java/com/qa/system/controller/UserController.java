@@ -1,6 +1,7 @@
 package com.qa.system.controller;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.qa.system.dao.MessageDao;
 import com.qa.system.entity.*;
 import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.BufferedImage;
+import java.security.MessageDigest;
 import java.util.List;
 
 @RestController
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    MessageDao messageDao;
 
     /**
     * @Author XuFengrui
@@ -234,7 +239,7 @@ public class UserController {
 
     /**
     * @Author XuFengrui
-    * @Description 通过用户名查询用户唯独消息的数量
+    * @Description 通过用户名查询用户未读消息的数量
     * @Date 19:03 2020/5/14
     * @Param [user] 用户名
     * @return int 未读消息的数量
@@ -258,5 +263,47 @@ public class UserController {
     @ResponseBody
     public int updateMessageStatus(@RequestBody Message message) {
         return userService.updateMessageStatus(message);
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询消息内容中的问题
+    * @Date 21:59 2020/5/14
+    * @Param [message] 消息编号id
+    * @return com.qa.system.entity.Question 问题类（无则返回null）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/messageQ")
+    @ResponseBody
+    public Question findMessageQuestion(@RequestBody Message message) {
+        return questionService.findQuestionById(messageDao.findMessageById(message.getId()).getQuestionId());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询消息内容中的回答
+    * @Date 21:59 2020/5/14
+    * @Param [message] 消息编号id
+    * @return com.qa.system.entity.Answer 回答类（无则返回null）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/messageA")
+    @ResponseBody
+    public Answer findMessageAnswer(@RequestBody Message message) {
+        return answerService.findAnswerById(messageDao.findMessageById(message.getId()).getAnswerId());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询消息内容中的评论
+    * @Date 21:59 2020/5/14
+    * @Param [message] 消息编号id
+    * @return com.qa.system.entity.Answer 回答类（无则返回null）
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/messageC")
+    @ResponseBody
+    public Answer updateMessageComment(@RequestBody Message message) {
+        return answerService.findAnswerById(messageDao.findMessageById(message.getId()).getCommentId());
     }
 }
