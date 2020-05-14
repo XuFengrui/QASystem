@@ -236,15 +236,27 @@ public class UserController {
     * @Author XuFengrui
     * @Description 通过用户名查询用户唯独消息的数量
     * @Date 19:03 2020/5/14
-    * @Param [user]
-    * @return int
+    * @Param [user] 用户名
+    * @return int 未读消息的数量
     **/
     @CrossOrigin
-    @PostMapping(value = "/user/unread")
+    @PostMapping(value = "/user/unRead")
     @ResponseBody
     public int countAvailableMessage(@RequestBody User user) {
         return userService.countAvailableMessage(user.getName());
     }
 
-
+    /**
+    * @Author XuFengrui
+    * @Description 将未读消息修改为已读
+    * @Date 19:10 2020/5/14
+    * @Param [message] 消息编号id
+    * @return int 成功返回1，失败返回0
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/byRead")
+    @ResponseBody
+    public int updateMessageStatus(@RequestBody Message message) {
+        return userService.updateMessageStatus(message);
+    }
 }

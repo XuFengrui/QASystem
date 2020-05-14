@@ -369,4 +369,16 @@ public class UserServiceImpl implements UserService {
     public int countAvailableMessage(String name) {
         return messageDao.countAvailableByName(name);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改消息的已读属性
+    * @Date 19:08 2020/5/14
+    * @Param [message]
+    * @return int
+    **/
+    @Override
+    public int updateMessageStatus(Message message) {
+        return messageDao.updateMessageStatus(message);
+    }
 }

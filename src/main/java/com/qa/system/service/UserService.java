@@ -37,5 +37,6 @@ public interface UserService {
     public List<User> findUsersByKeyword(String keyWord);
     public List<Message> findMessageByName(String name);
     public int countAvailableMessage(String name);
+    public int updateMessageStatus(Message message);
 
 }
