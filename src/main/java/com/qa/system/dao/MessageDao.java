@@ -115,7 +115,7 @@ public class MessageDao {
     * @return int
     **/
     public int userBlackMessage(String name) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,name,"您已被管理员拉黑",0,0,0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,name,"您已被管理员拉黑",0,0,0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -127,7 +127,7 @@ public class MessageDao {
     * @return int
     **/
     public int userWhiteMessage(String name) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,name,"您已被解除拉黑",0,0,0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,name,"您已被解除拉黑",0,0,0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -139,7 +139,7 @@ public class MessageDao {
     * @return int
     **/
     public int questionBlackMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被管理员屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被管理员屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -151,7 +151,7 @@ public class MessageDao {
     * @return int
     **/
     public int questionWhiteMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被解除屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个问题已被解除屏蔽",message.getQuestionId(),0,0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -163,7 +163,7 @@ public class MessageDao {
     * @return int
     **/
     public int answerBlackMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被管理员屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被管理员屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -175,7 +175,7 @@ public class MessageDao {
     * @return int
     **/
     public int answerWhiteMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被解除屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),"您有一个回答已被解除屏蔽",0,message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -187,7 +187,7 @@ public class MessageDao {
     * @return int
     **/
     public int byAnswerMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的回复",message.getQuestionId(),message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的回复",message.getQuestionId(),message.getAnswerId(),0,FormatChange.dateTimeChange(new Date()),0);
         return count;
     }
 
@@ -199,7 +199,31 @@ public class MessageDao {
     * @return int
     **/
     public int byCommentMessage(Message message) {
-        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time) values(?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的评论",0,message.getAnswerId(),message.getCommentId(),FormatChange.dateTimeChange(new Date()));
+        int count = jdbcTemplate.update("insert into message(id,recipient,sender,details,questionId,answerId,commentId,time,status) values(?,?,?,?,?,?,?,?,?)",maxId()+1,message.getRecipient(),message.getSender(),"您有一个新的评论",0,message.getAnswerId(),message.getCommentId(),FormatChange.dateTimeChange(new Date()),0);
         return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 将消息设置成已读消息
+    * @Date 17:05 2020/5/14
+    * @Param [message]
+    * @return int
+    **/
+    public int updateMessageStatus(Message message) {
+        int count = jdbcTemplate.update("update message set status = ? where id = ?",1,message.getId());
+        return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 读取未读消息的数量
+    * @Date 17:09 2020/5/14
+    * @Param [name]
+    * @return int
+    **/
+    public int countAvailableByName(String name) {
+        List<Message> messageList = jdbcTemplate.query("select * from message where recipient = ? and status = ? order by time desc", new BeanPropertyRowMapper<>(Message.class), name,0);
+        return messageList.size();
     }
 }

@@ -36,5 +36,6 @@ public interface UserService {
     public String getImageStr(User user);
     public List<User> findUsersByKeyword(String keyWord);
     public List<Message> findMessageByName(String name);
+    public int countAvailableMessage(String name);
 
 }

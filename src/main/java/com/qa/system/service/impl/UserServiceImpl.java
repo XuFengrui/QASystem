@@ -357,4 +357,16 @@ public class UserServiceImpl implements UserService {
     public List<Message> findMessageByName(String name) {
         return messageDao.findMessageByName(name);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询用户未读消息的数量
+    * @Date 19:01 2020/5/14
+    * @Param [name]
+    * @return int
+    **/
+    @Override
+    public int countAvailableMessage(String name) {
+        return messageDao.countAvailableByName(name);
+    }
 }

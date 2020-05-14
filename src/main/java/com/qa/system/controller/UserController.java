@@ -231,4 +231,20 @@ public class UserController {
     public List<Message> findMessageByName(@RequestBody User user) {
         return userService.findMessageByName(user.getName());
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 通过用户名查询用户唯独消息的数量
+    * @Date 19:03 2020/5/14
+    * @Param [user]
+    * @return int
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/unread")
+    @ResponseBody
+    public int countAvailableMessage(@RequestBody User user) {
+        return userService.countAvailableMessage(user.getName());
+    }
+
+
 }
