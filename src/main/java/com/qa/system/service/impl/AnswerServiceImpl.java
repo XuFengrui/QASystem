@@ -194,7 +194,7 @@ public class AnswerServiceImpl implements AnswerService {
                         message.setRecipient(questionDao.findQuestionById(answer.getaQuestionId()).getQuestioner());
                         message.setSender(answer.getAnswerer());
                         message.setQuestionId(answer.getaQuestionId());
-                        message.setAnswerId(answer.getAnswerId());
+                        message.setAnswerId(answerDao.maxAnswerId()+1);
                         messageDao.byAnswerMessage(message);
                         answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                         return answerDao.addAnswer(answer);
@@ -209,7 +209,7 @@ public class AnswerServiceImpl implements AnswerService {
                         message.setRecipient(answerDao.findAnswerById(answer.getaAnswerId()).getAnswerer());
                         message.setSender(answer.getAnswerer());
                         message.setAnswerId(answer.getaAnswerId());
-                        message.setCommentId(answer.getAnswerId());
+                        message.setCommentId(answerDao.maxAnswerId()+1);
                         messageDao.byCommentMessage(message);
                         answer.setDetails(SensitiveWordUtils.sensitiveHelper(answer.getDetails()));
                         return answerDao.addAnswer(answer);
