@@ -391,6 +391,6 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int updatePassword(User user) {
-        userDao.updatePassword(user);
+        return userDao.updatePassword(user);
     }
 }
