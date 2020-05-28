@@ -8,6 +8,7 @@ import com.qa.system.entity.*;
 import com.qa.system.service.AnswerService;
 import com.qa.system.utils.Base64Utils;
 import com.qa.system.utils.SensitiveWordUtils;
+import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,7 +100,6 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<VoAnswer> findWhiteVoAnswersByQuestionId(int id) {
         List<VoAnswer> voAnswerList= answerDao.findWhiteVoAnswersByQuestionId(id);
-        System.out.println(voAnswerList.size());
         for (int i = 0; i < voAnswerList.size(); i++) {
             VoAnswer voAnswer = voAnswerList.get(i);
             voAnswer.setIcon(Base64Utils.getImageStr(userDao.findUserByName(voAnswer.getAnswerer()).getIcon()));
@@ -123,6 +123,13 @@ public class AnswerServiceImpl implements AnswerService {
             for (int i = 0; i < comments.size(); i++) {
                 commentList.addAll(findWhiteVoCommentsByAnswerId(comments.get(i).getAnswerId()));
             }
+            VoComment voComment = answerDao.findWhiteVoCommentByCommentId(id);
+            if (voComment.getaAnswerId() != 0) {
+                User user = userDao.findUserByName(answerDao.findAnswerById(voComment.getaAnswerId()).getAnswerer());
+                voComment.setIcon(user.getIcon());
+                voComment.setByAnswerer(user.getName());
+                commentList.add(voComment);
+            }
         } else if (answerDao.findAnswerById(id).getaAnswerId() != 0) {
             VoComment voComment = answerDao.findWhiteVoCommentByCommentId(id);
             User user = userDao.findUserByName(answerDao.findAnswerById(voComment.getaAnswerId()).getAnswerer());
@@ -130,6 +137,7 @@ public class AnswerServiceImpl implements AnswerService {
             voComment.setByAnswerer(user.getName());
             commentList.add(voComment);
         }
+        TimeSort.voCommentListSort(commentList);
         return commentList;
     }
 

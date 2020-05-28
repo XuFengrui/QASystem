@@ -1,8 +1,12 @@
 package com.qa.system.controller;
 
+import com.qa.system.dao.AnswerDao;
 import com.qa.system.entity.Answer;
+import com.qa.system.entity.Message;
+import com.qa.system.entity.Question;
 import com.qa.system.entity.VoComment;
 import com.qa.system.service.AnswerService;
+import com.qa.system.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,9 @@ public class AnswerController {
 
     @Autowired
     AnswerService answerService;
+
+    @Autowired
+    QuestionService questionService;
 
     /**
     * @Author XuFengrui
@@ -75,5 +82,20 @@ public class AnswerController {
     @ResponseBody
     public List<VoComment> answerToComment(@RequestBody Answer answer) {
         return answerService.findWhiteVoCommentsByAnswerId(answer.getAnswerId());
+    }
+
+
+    @CrossOrigin
+    @PostMapping(value = "/user/answerQ")
+    @ResponseBody
+    public Question findAnswer_Question(@RequestBody Answer answer) {
+        return questionService.findQuestionById(answerService.findAnswerById(answer.getAnswerId()).getaQuestionId());
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/user/commentA")
+    @ResponseBody
+    public Answer findComment_Answer(@RequestBody Answer answer) {
+        return answerService.findAnswerById(answerService.findAnswerById(answer.getAnswerId()).getaAnswerId());
     }
 }

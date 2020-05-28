@@ -225,7 +225,7 @@ public class AnswerDao {
 
     /**
     * @Author XuFengrui
-    * @Description
+    * @Description 根据评论编号查找未被屏蔽的评论
     * @Date 9:47 2020/5/12
     * @Param [id]
     * @return java.util.List<com.qa.system.entity.VoComment>
