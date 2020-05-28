@@ -306,4 +306,18 @@ public class UserController {
     public Answer updateMessageComment(@RequestBody Message message) {
         return answerService.findAnswerById(messageDao.findMessageById(message.getId()).getCommentId());
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改用户密码
+    * @Date 10:55 2020/5/28
+    * @Param [user] 电话号码和修改的密码
+    * @return int 成功返回1，失败返回0
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/password")
+    @ResponseBody
+    public int updatePassword(@RequestBody User user) {
+        return userService.updatePassword(user);
+    }
 }

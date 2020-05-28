@@ -84,7 +84,13 @@ public class AnswerController {
         return answerService.findWhiteVoCommentsByAnswerId(answer.getAnswerId());
     }
 
-
+    /**
+    * @Author XuFengrui
+    * @Description 通过回答查询对应的问题
+    * @Date 10:48 2020/5/28
+    * @Param [answer] 回答编号
+    * @return com.qa.system.entity.Question 问题类
+    **/
     @CrossOrigin
     @PostMapping(value = "/user/answerQ")
     @ResponseBody
@@ -92,6 +98,13 @@ public class AnswerController {
         return questionService.findQuestionById(answerService.findAnswerById(answer.getAnswerId()).getaQuestionId());
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 通过评论查询回答（回答的回答）
+    * @Date 10:48 2020/5/28
+    * @Param [answer] 回答编号
+    * @return com.qa.system.entity.Answer 回答类
+    **/
     @CrossOrigin
     @PostMapping(value = "/user/commentA")
     @ResponseBody

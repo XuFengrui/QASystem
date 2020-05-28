@@ -381,4 +381,16 @@ public class UserServiceImpl implements UserService {
     public int updateMessageStatus(Message message) {
         return messageDao.updateMessageStatus(message);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改用户密码
+    * @Date 10:54 2020/5/28
+    * @Param [user]
+    * @return int 成功返回1，不成功返回0
+    **/
+    @Override
+    public int updatePassword(User user) {
+        userDao.updatePassword(user);
+    }
 }

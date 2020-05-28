@@ -199,4 +199,16 @@ public class UserDao {
         return userList;
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 修改密码
+    * @Date 10:53 2020/5/28
+    * @Param [user]
+    * @return int 成功返回1，不成功返回0
+    **/
+    public int updatePassword(User user){
+        int count = jdbcTemplate.update("update user set password = ? where phone = ?",user.getPassword(),user.getPhone());
+        return count;
+    }
+
 }

@@ -58,7 +58,6 @@
 			<artifactId>aliyun-java-sdk-core</artifactId>
 			<version>4.0.6</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.aliyun</groupId>
 			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
@@ -73,7 +72,6 @@
 			<artifactId>commons-codec</artifactId>
 			<version>${commons-codec.version}</version>
 		</dependency>
-
 	</dependencies>
 
 
