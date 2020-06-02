@@ -7,12 +7,12 @@ import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
 import com.qa.system.service.RegisterService;
 import com.qa.system.service.UserService;
+import com.qa.system.utils.Sha256Utils;
 import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.BufferedImage;
-import java.security.MessageDigest;
 import java.util.List;
 
 @RestController
@@ -318,6 +318,7 @@ public class UserController {
     @PostMapping(value = "/user/password")
     @ResponseBody
     public int updatePassword(@RequestBody User user) {
+        user.setPassword(Sha256Utils.getSHA256Str(user.getPassword()));
         return userService.updatePassword(user);
     }
 }
