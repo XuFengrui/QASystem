@@ -1,10 +1,7 @@
 package com.qa.system.service;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.qa.system.entity.Message;
-import com.qa.system.entity.Question;
-import com.qa.system.entity.Register;
-import com.qa.system.entity.User;
+import com.qa.system.entity.*;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -19,6 +16,8 @@ import java.util.List;
 public interface UserService {
 
     public List<User> findAllUser();
+    public List<User> findAllWhiteUsers();
+    public List<User> findAllBlackUsers();
     public User findUserByPhone(String phone);
     public User findUserByName(String name);
     public String queryPhoneByName(String name);

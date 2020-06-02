@@ -66,6 +66,30 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
+    * @Description 查询所有未拉黑用户
+    * @Date 15:43 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    @Override
+    public List<User> findAllWhiteUsers() {
+        return userDao.findAllWhiteUsers();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有已拉黑用户
+    * @Date 15:43 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.User>
+    **/
+    @Override
+    public List<User> findAllBlackUsers() {
+        return userDao.findAllBlackUsers();
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 根据号码查询用户，存在则返回该用户类，不存在返回null
     * @Date 16:41 2020/3/29
     * @Param [phone]

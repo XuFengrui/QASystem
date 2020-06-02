@@ -51,6 +51,30 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
     * @Author XuFengrui
+    * @Description 查询所有未屏蔽问题
+    * @Date 15:42 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    @Override
+    public List<Question> findAllWhiteQuestions() {
+        return questionDao.findAllWhiteQuestions();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有已屏蔽问题
+    * @Date 15:42 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Question>
+    **/
+    @Override
+    public List<Question> findAllBlackQuestions() {
+        return questionDao.findAllBlackQuestions();
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 将问题按最新回答的时间顺序展示
     * @Date 13:45 2020/3/30
     * @Param []

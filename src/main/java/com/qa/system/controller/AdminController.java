@@ -271,4 +271,87 @@ public class AdminController {
         return answerService.findAnswersByKeyword(admin.getName());
     }
 
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有未拉黑用户
+    * @Date 15:48 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.User> 用户类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/whiteUsers")
+    @ResponseBody
+    public List<User> findAllWhiteUsers() {
+        return userService.findAllWhiteUsers();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有已拉黑用户
+    * @Date 15:49 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.User> 用户类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/BlackUsers")
+    @ResponseBody
+    public List<User> findAllBlackUsers() {
+        return userService.findAllBlackUsers();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有未屏蔽问题
+    * @Date 15:49 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.Question> 问题类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/whiteQuestions")
+    @ResponseBody
+    public List<Question> findAllWhiteQuestions() {
+        return questionService.findAllWhiteQuestions();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有已屏蔽问题
+    * @Date 15:50 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.Question> 问题类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/blackQuestions")
+    @ResponseBody
+    public List<Question> findAllBlackQuestions() {
+        return questionService.findAllBlackQuestions();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有未屏蔽回答
+    * @Date 15:50 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.Answer> 回答类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/whiteAnswers")
+    @ResponseBody
+    public List<Answer> findAllWhiteAnswers() {
+        return answerService.findAllWhiteAnswers();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询所有已屏蔽回答
+    * @Date 15:51 2020/6/2
+    * @Param [] 无
+    * @return java.util.List<com.qa.system.entity.Answer> 回答类数组
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/blackAnswers")
+    @ResponseBody
+    public List<Answer> findAllBlackAnswers() {
+        return answerService.findAllBlackAnswers();
+    }
 }

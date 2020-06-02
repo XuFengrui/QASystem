@@ -17,6 +17,8 @@ import java.util.List;
 public interface AnswerService {
 
     public List<Answer> findAllAnswer();
+    public List<Answer> findAllWhiteAnswers();
+    public List<Answer> findAllBlackAnswers();
     public Answer findAnswerById(int id);
     public List<Answer> findAnswersByQuestionId(int id);
     public List<Answer> findAnswerByUserName(String name);

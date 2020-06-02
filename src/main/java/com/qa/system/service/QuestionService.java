@@ -2,7 +2,6 @@ package com.qa.system.service;
 
 import com.qa.system.entity.Question;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,6 +14,8 @@ import java.util.List;
 public interface QuestionService {
 
     public List<Question> findAllQuestion();
+    public List<Question> findAllWhiteQuestions();
+    public List<Question> findAllBlackQuestions();
     public List<Question> findWhiteQuestionByTimeOrder();
     public List<Question> showQuestionsByKeyword(String string);
     public List<Question> findQuestionByUserName(String name);

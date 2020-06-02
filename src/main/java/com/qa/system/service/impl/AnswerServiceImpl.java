@@ -52,6 +52,30 @@ public class AnswerServiceImpl implements AnswerService {
 
     /**
     * @Author XuFengrui
+    * @Description 查询所有未屏蔽回答
+    * @Date 15:40 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @Override
+    public List<Answer> findAllWhiteAnswers() {
+        return answerDao.findAllWhiteAnswers();
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查看所有已屏蔽回答
+    * @Date 15:41 2020/6/2
+    * @Param []
+    * @return java.util.List<com.qa.system.entity.Answer>
+    **/
+    @Override
+    public List<Answer> findAllBlackAnswers() {
+        return answerDao.findAllBlackAnswers();
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 根据回答编号查询回答
     * @Date 16:39 2020/3/29
     * @Param [id]
