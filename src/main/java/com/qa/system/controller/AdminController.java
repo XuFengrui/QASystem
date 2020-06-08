@@ -293,7 +293,7 @@ public class AdminController {
     * @return java.util.List<com.qa.system.entity.User> 用户类数组
     **/
     @CrossOrigin
-    @PostMapping(value = "/admin/BlackUsers")
+    @PostMapping(value = "/admin/blackUsers")
     @ResponseBody
     public List<User> findAllBlackUsers() {
         return userService.findAllBlackUsers();
