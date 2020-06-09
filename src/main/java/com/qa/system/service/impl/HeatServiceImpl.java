@@ -90,14 +90,14 @@ public class HeatServiceImpl implements HeatService {
 
     /**
     * @Author XuFengrui
-    * @Description 修改问题的热度属性，-1表示已浏览过，无需修改，1表示修改成功，0表示修改失败
+    * @Description 修改问题的热度属性，-1表示已浏览过或被未登录游客浏览，无需修改，1表示修改成功，0表示修改失败
     * @Date 10:12 2020/4/16
     * @Param [heat]
     * @return int
     **/
     @Override
     public int updateHeatOfQuestion(Heat heat) {
-        if (heatDao.isUserExistInQuestion(heat.getPhone(), heat.getQuestionId()) == 1) {
+        if (heat.getPhone() == null || heatDao.isUserExistInQuestion(heat.getPhone(), heat.getQuestionId()) == 1) {
             return -1;
         } else {
             heatDao.addHeat(heat);

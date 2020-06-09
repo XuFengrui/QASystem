@@ -92,8 +92,7 @@ public class AdminServiceImpl implements AdminService {
         if (adminDao.isAdminExist(admin.getName())) {
             if (adminDao.findAdminByName(admin.getName()).getPassword().equals(admin.getPassword())) {
                 if (adminDao.findAdminByName(admin.getName()).getStatus() == 0) {
-                    admin.setStatus(1);
-                    return adminDao.updateAdminStatus(admin);
+                    return 1;
                 } else {
                     return -2;
                 }
@@ -107,7 +106,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
     * @Author XuFengrui
-    * @Description 管理员退出登录，登陆状态码归0，-1表示该账号不存在，0表示该账号登录状态码已归0，1表示退出登录成功
+    * @Description 管理员退出登录，登陆状态码归0，-1表示该账号不存在，1表示退出登录成功
     * @Date 11:26 2020/4/14
     * @Param [admin]
     * @return int
@@ -115,12 +114,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int exitAdmin(Admin admin) {
         if (adminDao.isAdminExist(admin.getName())) {
-            if (adminDao.findAdminByName(admin.getName()).getStatus() == 1) {
-                admin.setStatus(0);
-                return adminDao.updateAdminStatus(admin);
-            } else {
-                return 0;
-            }
+            return 1;
         } else {
             return -1;
         }

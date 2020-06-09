@@ -1,12 +1,9 @@
 package com.qa.system.controller;
 
-import com.qa.system.dao.HeatDao;
 import com.qa.system.entity.Heat;
-import com.qa.system.entity.User;
 import com.qa.system.service.HeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.awt.HeadlessToolkit;
 
 import java.util.List;
 
@@ -28,13 +25,17 @@ public class HeatController {
     * @Description 查询该用户之前是否浏览过该问题
     * @Date 9:52 2020/4/16
     * @Param [heat] 电话号码phone，问题编号questionId
-    * @return int 若浏览过返回1，未浏览过返回0
+    * @return int 若浏览过或未登录用户浏览返回1，未浏览过返回0
     **/
     @CrossOrigin
     @PostMapping(value = "/heat/query")
     @ResponseBody
     public int isUserExistInQuestion(@RequestBody Heat heat) {
-        return heatService.isUserExistInQuestion(heat.getPhone(),heat.getQuestionId());
+        if (heat.getPhone() == null) {
+            return 1;
+        } else {
+            return heatService.isUserExistInQuestion(heat.getPhone(),heat.getQuestionId());
+        }
     }
 
     /**

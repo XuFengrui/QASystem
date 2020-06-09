@@ -219,7 +219,7 @@ public class QuestionDao {
     * @return java.util.List<com.qa.system.entity.Question>
     **/
     public List<Question> sortQuestionByHeat() {
-        List<Question> questionList = jdbcTemplate.query("select * from question order by heat desc",new Object[]{},new BeanPropertyRowMapper<>(Question.class));
+        List<Question> questionList = jdbcTemplate.query("select * from question where shield = ? order by heat desc",new BeanPropertyRowMapper<>(Question.class),1);
         return questionList;
     }
 

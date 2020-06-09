@@ -244,12 +244,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int blacklistUser(User user) {
         if (userDao.isUserExistByPhone(user.getPhone())) {
-            if (userDao.findUserByPhone(user.getPhone()).getShield() == 1) {
-                user.setShield(0);
-                userDao.userShield(user);
-                questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-                answerService.blacklistAnswers(answerDao.findAnswersByUserName(user.getName()));
-                messageDao.userBlackMessage(userDao.findUserByPhone(user.getPhone()).getName());
+            User user1 = userDao.findUserByPhone(user.getPhone());
+            if (user1.getShield() == 1) {
+                user1.setShield(0);
+                userDao.userShield(user1);
+                questionService.blacklistQuestions(questionDao.findQuestionsByUserName(user1.getName()));
+                answerService.blacklistAnswers(answerDao.findAnswersByUserName(user1.getName()));
+                messageDao.userBlackMessage(user1.getName());
                 return 1;
             } else {
                 return 0;
@@ -270,12 +271,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int whitelistUser(User user) {
         if (userDao.isUserExistByPhone(user.getPhone())) {
-            if (userDao.findUserByPhone(user.getPhone()).getShield() == 0) {
-                user.setShield(1);
-                userDao.userShield(user);
-                questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user.getName()));
-                answerService.whitelistAnswers(answerDao.findAnswersByUserName(user.getName()));
-                messageDao.userWhiteMessage(userDao.findUserByPhone(user.getPhone()).getName());
+            User user1 = userDao.findUserByPhone(user.getPhone());
+            if (user1.getShield() == 0) {
+                user1.setShield(1);
+                userDao.userShield(user1);
+                questionService.whitelistQuestions(questionDao.findQuestionsByUserName(user1.getName()));
+                answerService.whitelistAnswers(answerDao.findAnswersByUserName(user1.getName()));
+                messageDao.userWhiteMessage(user1.getName());
                 return 1;
             } else {
                 return 0;
