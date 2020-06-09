@@ -57,7 +57,27 @@ public class SendMailUtils {
         simpleMailMessage.setTo(toMail);
         simpleMailMessage.setSubject("开心论坛注册成功通知");
         simpleMailMessage.setText("恭喜"+name+"小主，您在开心论坛的注册申请已通过，相信您的到来一定会让开心论坛蓬荜生辉！");
+        try {
+            javaMailSender.send(simpleMailMessage);
+            System.out.println("邮件已发送");
+        } catch (Exception e) {
+            System.out.println("邮件发送失败。"+e.getMessage());
+        }
+    }
 
+    /**
+    * @Author XuFengrui
+    * @Description 发送注册失败的通知邮件
+    * @Date 17:15 2020/6/9
+    * @Param [toMail, name]
+    * @return void
+    **/
+    public void sendFailedRegisterMail(String toMail,String name) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(fromMail);
+        simpleMailMessage.setTo(toMail);
+        simpleMailMessage.setSubject("开心论坛注册失败通知");
+        simpleMailMessage.setText("很遗憾，"+name+"小主，您在开心论坛的注册申请被拒绝，期待与您的下一次相遇！");
         try {
             javaMailSender.send(simpleMailMessage);
             System.out.println("邮件已发送");

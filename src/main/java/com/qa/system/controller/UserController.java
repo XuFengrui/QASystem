@@ -112,7 +112,7 @@ public class UserController {
     * @Description 用户申请注册
     * @Date 23:47 2020/4/2
     * @Param [register] 注册类
-    * @return int 用户已注册导致注册失败返回-1；注册成功返回1
+    * @return int 用户名冲突返回-1；号码已被注册返回-2，注册成功返回1
     **/
     @CrossOrigin
     @PostMapping(value = "/user/register")

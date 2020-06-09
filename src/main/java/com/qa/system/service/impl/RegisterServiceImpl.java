@@ -59,7 +59,7 @@ public class RegisterServiceImpl implements RegisterService {
     **/
     @Override
     public int updateRegister(Register register) {
-        if (registerDao.isRegisterExist(register.getPhone())) {
+        if (registerDao.isRegisterExistByPhone(register.getPhone())) {
             return registerDao.updateRegister(register);
         }else {
             return -1;
@@ -75,7 +75,7 @@ public class RegisterServiceImpl implements RegisterService {
     **/
     @Override
     public int addRegister(Register register) {
-        if(!registerDao.isRegisterExist(register.getPhone())){
+        if(!registerDao.isRegisterExistByPhone(register.getPhone())){
             return registerDao.addRegister(register);
         }else {
             return -1;
@@ -91,7 +91,7 @@ public class RegisterServiceImpl implements RegisterService {
     **/
     @Override
     public int deleteRegisterByPhone(String phone) {
-        if(registerDao.isRegisterExist(phone)){
+        if(registerDao.isRegisterExistByPhone(phone)){
             return registerDao.deleteRegisterByPhone(phone);
         }else {
             return -1;
@@ -100,19 +100,21 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
     * @Author XuFengrui
-    * @Description 用户申请注册，若注册表里没有该号码绑定的信息则直接注册，若注册表里有但用户表里没有则更改注册信息，若用户表里存在则注册失败并返回-1
+    * @Description 用户申请注册，若注册表里没有该号码绑定的信息则直接注册，若注册表里有但用户表里没有则更改注册信息，若用户名冲突返回-1，号码已被注册返回-2
     * @Date 16:41 2020/3/29
-    * @Param [phone, register]
+    * @Param [register]
     * @return int
     **/
     @Override
     public int applyRegister(Register register) {
-        if (!registerDao.isRegisterExist(register.getPhone())) {
+        if (registerDao.isRegisterExistByName(register.getName())) {
+            return -1;
+        } else if (!registerDao.isRegisterExistByPhone(register.getPhone())) {
             return registerDao.addRegister(register);
         } else if (!userDao.isUserExistByPhone(register.getPhone())) {
             return registerDao.updateRegister(register);
         } else {
-            return -1;
+            return -2;
         }
     }
 
@@ -120,7 +122,7 @@ public class RegisterServiceImpl implements RegisterService {
     * @Author XuFengrui
     * @Description 查询所有未注册成功的用户信息，返回register类数组
     * @Date 22:09 2020/4/14
-    * @Param [] 注册用户的电话号码
+    * @Param []
     * @return com.qa.system.entity.Register
     **/
     @Override

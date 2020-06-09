@@ -213,14 +213,14 @@ public class UserServiceImpl implements UserService {
 
     /**
     * @Author XuFengrui
-    * @Description 注册用户，-1表示注册表中没有该用户信息
+    * @Description 同意用户注册，-1表示注册表中没有该用户信息，0表示同意失败，1表示同意成功
     * @Date 16:41 2020/3/29
     * @Param [register]
     * @return int
     **/
     @Override
     public int registerUser(Register register) throws ClientException {
-        if (registerDao.isRegisterExist(register.getPhone())) {
+        if (registerDao.isRegisterExistByPhone(register.getPhone())) {
             User user = new User();
             user.setPhone(register.getPhone());
             user.setName(register.getName());
@@ -229,6 +229,23 @@ public class UserServiceImpl implements UserService {
             user.setAge(register.getAge());
             sendMailUtils.sendSuccessRegisterMail(register.getMail(),register.getName());
             return addUser(user);
+        }else {
+            return -1;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 拒绝用户注册，-1表示没有该用户的注册信息，0表示拒绝失败，1表示拒绝成功
+    * @Date 17:16 2020/6/9
+    * @Param [register]
+    * @return int
+    **/
+    @Override
+    public int registerRefuse(Register register) throws ClientException {
+        if (registerDao.isRegisterExistByPhone(register.getPhone())) {
+            sendMailUtils.sendFailedRegisterMail(register.getMail(),register.getName());
+            return registerDao.deleteRegisterByPhone(register.getPhone());
         }else {
             return -1;
         }

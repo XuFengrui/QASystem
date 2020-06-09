@@ -41,13 +41,41 @@ public class RegisterDao {
 
     /**
     * @Author XuFengrui
+    * @Description 根据用户名查询申请注册的用户
+    * @Date 16:57 2020/6/9
+    * @Param [phone]
+    * @return com.qa.system.entity.Register
+    **/
+    public Register findRegisterByName(String name){
+
+        List<Register> registerList = jdbcTemplate.query("select * from register where name = ?",new BeanPropertyRowMapper<>(Register.class),name);
+        if(registerList.size()>0){
+            return registerList.get(0);
+        }else{
+            return null;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 查询号码是否已经申请注册，false表示还未申请，true表示已经申请
     * @Date 16:26 2020/3/29
     * @Param [phone]
     * @return boolean
     **/
-    public boolean isRegisterExist(String phone){
+    public boolean isRegisterExistByPhone(String phone){
         return findRegisterByPhone(phone) != null;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 查询该用户名是否已经申请注册，false表示还未申请，true表示已经申请
+    * @Date 17:00 2020/6/9
+    * @Param [name]
+    * @return boolean
+    **/
+    public boolean isRegisterExistByName(String name){
+        return findRegisterByName(name) != null;
     }
 
     /**

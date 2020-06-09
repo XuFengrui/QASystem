@@ -189,6 +189,20 @@ public class AdminController {
 
     /**
      * @Author XuFengrui
+     * @Description 拒绝用户注册
+     * @Date 0:43 2020/4/3
+     * @Param [register] 注册类
+     * @return int 注册成功返回1；注册失败返回0；注册信息不存在返回-1
+     **/
+    @CrossOrigin
+    @PostMapping(value = "/admin/refuseRegister")
+    @ResponseBody
+    public int adminRefuseRegister(@RequestBody Register register) throws ClientException {
+        return userService.registerRefuse(register);
+    }
+
+    /**
+     * @Author XuFengrui
      * @Description 管理员登录
      * @Date 20:59 2020/4/13
      * @Param [admin] 管理员的账号和密码
