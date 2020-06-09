@@ -39,5 +39,6 @@ public interface UserService {
     public int countAvailableMessage(String name);
     public int updateMessageStatus(Message message);
     public int updatePassword(User user);
+    public int messageType(Message message);
 
 }

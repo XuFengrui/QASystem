@@ -436,4 +436,33 @@ public class UserServiceImpl implements UserService {
     public int updatePassword(User user) {
         return userDao.updatePassword(user);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 判断消息类型
+    * @Date 20:24 2020/6/9
+    * @Param [message]
+    * @return int 1表示（解除）拉黑用户，2表示（取消）屏蔽问题，3表示（取消）屏蔽回答，4表示（取消）屏蔽评论，5表示该问题有新的回答，6表示该回答有新的评论
+    **/
+    @Override
+    public int messageType(Message message) {
+        Message message1 = messageDao.findMessageById(message.getId());
+        if (message1.getSender() == null) {
+            if (message1.getQuestionId() != 0) {
+                return 2;
+            } else if (message1.getAnswerId() != 0) {
+                return 3;
+            } else if (message1.getCommentId() != 0) {
+                return 4;
+            } else {
+                return 1;
+            }
+        } else {
+            if (message1.getQuestionId() != 0) {
+                return 5;
+            } else {
+                return 6;
+            }
+        }
+    }
 }

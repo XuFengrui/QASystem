@@ -321,4 +321,18 @@ public class UserController {
         user.setPassword(Sha256Utils.getSHA256Str(user.getPassword()));
         return userService.updatePassword(user);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 判断消息类型
+    * @Date 20:26 2020/6/9
+    * @Param [message] 消息编号id
+    * @return int 1表示（解除）拉黑用户，2表示（取消）屏蔽问题，3表示（取消）屏蔽回答，4表示（取消）屏蔽评论，5表示该问题有新的回答，6表示该回答有新的评论
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/messageType")
+    @ResponseBody
+    public int messageType(@RequestBody Message message) {
+        return userService.messageType(message);
+    }
 }
