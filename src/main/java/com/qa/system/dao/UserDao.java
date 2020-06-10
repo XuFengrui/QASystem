@@ -96,7 +96,7 @@ public class UserDao {
     * @return int
     **/
     public int addUser(User user){
-        int count = jdbcTemplate.update("insert into user(phone,name,password,sex,age,shield) values(?,?,?,?,?,?)",user.getPhone(),user.getName(),user.getPassword(),user.getSex(),user.getAge(),user.getShield());
+        int count = jdbcTemplate.update("insert into user(icon,phone,name,password,sex,age,shield) values(?,?,?,?,?,?,?)","D:/icon/1588916956914.png",user.getPhone(),user.getName(),user.getPassword(),user.getSex(),user.getAge(),user.getShield());
         return count;
     }
 

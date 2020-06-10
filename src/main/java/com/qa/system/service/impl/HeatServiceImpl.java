@@ -7,7 +7,6 @@ import com.qa.system.entity.Question;
 import com.qa.system.service.HeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.plugin2.main.server.HeartbeatThread;
 
 import java.util.List;
 
