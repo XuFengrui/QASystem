@@ -1,15 +1,11 @@
 package com.qa.system.dao;
 
 import com.qa.system.entity.Heat;
-import com.qa.system.entity.Question;
-import com.qa.system.entity.User;
-import com.qa.system.utils.FormatChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 /**

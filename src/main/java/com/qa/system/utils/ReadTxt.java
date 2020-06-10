@@ -1,12 +1,8 @@
 package com.qa.system.utils;
-import com.sun.media.jfxmedia.track.Track;
-import org.springframework.boot.autoconfigure.http.HttpProperties;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -19,7 +15,7 @@ import java.util.Set;
 @Component
 public class ReadTxt {
 
-    public static Set<String > readFile(String filePath) throws Exception{
+    public static Set<String> readFile(String filePath) throws Exception{
         //存放文件内容的set集合
         Set<String> set = null;
         //读取文件
