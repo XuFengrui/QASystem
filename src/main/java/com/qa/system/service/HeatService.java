@@ -1,7 +1,6 @@
 package com.qa.system.service;
 
 import com.qa.system.entity.Heat;
-import com.qa.system.entity.Question;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.qa.system.service;
 
-import com.qa.system.entity.Question;
 import com.qa.system.entity.Register;
 
 import java.util.List;

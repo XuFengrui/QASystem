@@ -1,8 +1,6 @@
 package com.qa.system.controller;
 
-import com.qa.system.dao.AnswerDao;
 import com.qa.system.entity.Answer;
-import com.qa.system.entity.Message;
 import com.qa.system.entity.Question;
 import com.qa.system.entity.VoComment;
 import com.qa.system.service.AnswerService;
@@ -72,7 +70,7 @@ public class AnswerController {
 
     /**
     * @Author XuFengrui
-    * @Description 根据回答查询回答编号
+    * @Description 根据回答编号查询评论
     * @Date 9:58 2020/5/12
     * @Param [answer] 回答编号
     * @return java.util.List<VoComment> 返回该回答下的所有未被屏蔽的评论
