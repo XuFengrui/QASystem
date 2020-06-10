@@ -335,4 +335,18 @@ public class UserController {
     public int messageType(@RequestBody Message message) {
         return userService.messageType(message);
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改电话号码
+    * @Date 16:51 2020/6/10
+    * @Param [user] 新的电话号码，用户名
+    * @return int 1表示成功，0表示失败
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/updatePhone")
+    @ResponseBody
+    public int updatePhoneByName(@RequestBody User user) {
+        return userService.updateUserPhoneByName(user);
+    }
 }

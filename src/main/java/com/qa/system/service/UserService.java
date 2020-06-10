@@ -40,5 +40,6 @@ public interface UserService {
     public int updateMessageStatus(Message message);
     public int updatePassword(User user);
     public int messageType(Message message);
+    public int updateUserPhoneByName(User user);
 
 }

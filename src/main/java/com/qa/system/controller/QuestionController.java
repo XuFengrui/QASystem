@@ -1,18 +1,12 @@
 package com.qa.system.controller;
 
-import com.qa.system.entity.Answer;
 import com.qa.system.entity.Question;
 import com.qa.system.entity.VoAnswer;
 import com.qa.system.service.AnswerService;
 import com.qa.system.service.QuestionService;
-import com.qa.system.service.UserService;
-import com.qa.system.utils.Base64Utils;
-import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,8 +25,6 @@ public class QuestionController {
     @Autowired
     AnswerService answerService;
 
-    @Autowired
-    UserService userService;
 
     /**
     * @Author XuFengrui

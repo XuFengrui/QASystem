@@ -465,4 +465,16 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改电话号码
+    * @Date 16:49 2020/6/10
+    * @Param [user]
+    * @return int
+    **/
+    @Override
+    public int updateUserPhoneByName(User user) {
+        return userDao.updateUserPhoneByName(user);
+    }
 }

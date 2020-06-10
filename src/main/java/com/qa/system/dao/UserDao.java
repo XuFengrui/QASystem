@@ -1,6 +1,5 @@
 package com.qa.system.dao;
 
-import com.qa.system.entity.Question;
 import com.qa.system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -208,6 +207,18 @@ public class UserDao {
     **/
     public int updatePassword(User user){
         int count = jdbcTemplate.update("update user set password = ? where phone = ?",user.getPassword(),user.getPhone());
+        return count;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 修改电话号码
+    * @Date 16:46 2020/6/10
+    * @Param [user]
+    * @return int 成功返回1，不成功返回0
+    **/
+    public int updateUserPhoneByName(User user){
+        int count = jdbcTemplate.update("update user set phone = ? where name = ?",user.getPhone(),user.getName());
         return count;
     }
 

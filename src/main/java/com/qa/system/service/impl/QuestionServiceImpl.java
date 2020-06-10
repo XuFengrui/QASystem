@@ -9,7 +9,6 @@ import com.qa.system.utils.TimeSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,12 +26,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     UserDao userDao;
-
-    @Autowired
-    AnswerDao answerDao;
-
-    @Autowired
-    HeatDao heatDao;
 
     @Autowired
     MessageDao messageDao;
