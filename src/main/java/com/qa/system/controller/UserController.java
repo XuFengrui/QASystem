@@ -63,6 +63,34 @@ public class UserController {
 
     /**
     * @Author XuFengrui
+    * @Description 发送注册验证码
+    * @Date 8:02 2020/6/11
+    * @Param [register] 注册用户的电话号码
+    * @return java.lang.String
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/registerCode")
+    @ResponseBody
+    public String registerByCode(@RequestBody Register register) throws ClientException {
+        return registerService.registerByAuthCode(register.getPhone());
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 发送验证码
+    * @Date 8:02 2020/6/11
+    * @Param [user] 用户的新电话号码
+    * @return java.lang.String
+    **/
+    @CrossOrigin
+    @PostMapping(value = "/user/sendCode")
+    @ResponseBody
+    public String sendCode(@RequestBody User user) throws ClientException {
+        return userService.sendCode(user);
+    }
+
+    /**
+    * @Author XuFengrui
     * @Description 查询某一用户所发布的所有问题
     * @Date 23:27 2020/4/2
     * @Param [user] 姓名

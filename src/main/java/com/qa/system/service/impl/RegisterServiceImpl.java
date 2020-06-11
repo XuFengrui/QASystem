@@ -1,9 +1,11 @@
 package com.qa.system.service.impl;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.qa.system.dao.RegisterDao;
 import com.qa.system.dao.UserDao;
 import com.qa.system.entity.Register;
 import com.qa.system.service.RegisterService;
+import com.qa.system.utils.AliyunSmsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -154,5 +156,17 @@ public class RegisterServiceImpl implements RegisterService {
             }
         }
         return registerList;
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 发送注册验证码
+    * @Date 7:55 2020/6/11
+    * @Param [phone]
+    * @return java.lang.String
+    **/
+    @Override
+    public String registerByAuthCode(String phone) throws ClientException {
+        return AliyunSmsUtils.verificationCode(phone);
     }
 }

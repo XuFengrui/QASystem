@@ -475,6 +475,26 @@ public class UserServiceImpl implements UserService {
     **/
     @Override
     public int updateUserPhoneByName(User user) {
-        return userDao.updateUserPhoneByName(user);
+        if (userDao.isUserExistByName(user.getName())) {
+            Register register = new Register();
+            register.setName(user.getName());
+            register.setPhone(user.getPhone());
+            registerDao.updateRegisterPhoneByName(register);
+            return userDao.updateUserPhoneByName(user);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+    * @Author XuFengrui
+    * @Description 发送验证码
+    * @Date 8:00 2020/6/11
+    * @Param [user]
+    * @return java.lang.String
+    **/
+    @Override
+    public String sendCode(User user) throws ClientException {
+        return AliyunSmsUtils.verificationCode(user.getPhone());
     }
 }

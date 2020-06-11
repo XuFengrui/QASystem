@@ -1,5 +1,6 @@
 package com.qa.system.service;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.qa.system.entity.Register;
 
 import java.util.List;
@@ -21,5 +22,6 @@ public interface RegisterService {
     public int deleteRegisterByPhone(String phone);
     public int applyRegister(Register register);
     public List<Register> findRegistersByKeyword(String keyWord);
+    public String registerByAuthCode(String phone) throws ClientException;
 
 }

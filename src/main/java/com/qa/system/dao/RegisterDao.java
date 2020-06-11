@@ -140,4 +140,16 @@ public class RegisterDao {
         List<Register> registerList = jdbcTemplate.query("select * from register where phone like ? or name like ? or mail = ?",new Object[]{"%"+strWord+"%","%"+strWord+"%","%"+strWord+"%"},new BeanPropertyRowMapper<>(Register.class));
         return registerList;
     }
+
+    /**
+    * @Author XuFengrui
+    * @Description 根据注册用户名修改电话号码
+    * @Date 7:21 2020/6/11
+    * @Param [register]
+    * @return int
+    **/
+    public int updateRegisterPhoneByName(Register register) {
+        int count = jdbcTemplate.update("update register set phone = ? where name = ?",register.getPhone(),register.getName());
+        return count;
+    }
 }

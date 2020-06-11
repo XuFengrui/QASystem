@@ -41,5 +41,6 @@ public interface UserService {
     public int updatePassword(User user);
     public int messageType(Message message);
     public int updateUserPhoneByName(User user);
+    public String sendCode(User user) throws ClientException;
 
 }
